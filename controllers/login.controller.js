@@ -2,6 +2,7 @@
 var router = express.Router();
 var request = require('request');
 var config = require('config.json');
+var userService = require('services/user.service');
 
 router.get('/', function (req, res) {
     delete req.session.token;
