@@ -1,5 +1,9 @@
+var config = require('config.json');
+var userService = require('services/user.service');
+var mongo = require('mongoskin');
 var db = mongo.db(config.connectionString, { native_parser: true });
 db.bind('logs');
+
 var Q = require('q');
 var service = {};
 
@@ -21,6 +25,7 @@ function insert(log) {
 			 });
 	 return deferred.promise;
 }
+
 
 function find(log)
 {

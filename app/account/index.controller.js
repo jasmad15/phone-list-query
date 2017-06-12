@@ -14,6 +14,7 @@
         vm.insertUpdate = createUser;
         vm.findUser = findUser;
 
+
         initController();
 
         function initController() {
@@ -45,10 +46,9 @@
         }
 
         function deleteUser() {
-            UserService.Delete(vm.user._id)
+            UserService.Delete(vm.id)
                 .then(function () {
-                    // log user out
-                    $window.location = '/login';
+                	FlashService.Success('Usuario borrado con exito');
                 })
                 .catch(function (error) {
                     FlashService.Error(error);
@@ -58,13 +58,13 @@
         function findUser() {
             UserService.GetByFilter(vm.user)
                 .then(function (user) {
-                	//Tengo que ver que coño hago
                     FlashService.Success('Usuario Actualizado');
                 })
                 .catch(function (error) {
                     FlashService.Error(error);
                 });
         }
+        
     }
 
 })();

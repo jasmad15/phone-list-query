@@ -5,10 +5,12 @@
         .module('app')
         .controller('Home.IndexController', Controller);
 
-    function Controller(UserService) {
+    function Controller(UserService, PhoneListService, FlashService) {
         var vm = this;
 
         vm.user = null;
+        vm.listin = null;
+        vm.findNumber = findNumber;
 
         initController();
 
@@ -17,6 +19,17 @@
             UserService.GetCurrent().then(function (user) {
                 vm.user = user;
             });
+        }
+        
+        function findNumber() {
+             PhoneListService.findNumber(vm.listin)
+                .then(function (data) {
+                    FlashService.Success('Usuario Actualizado');
+                })
+                .catch(function (error) {
+                    FlashService.Error(error);
+                });
+                
         }
     }
 
