@@ -15,7 +15,7 @@ module.exports = service;
 function findOne(phoneNumber)
 {
 	 var deferred = Q.defer();
-	 db.listin.findOne({NVOMSISDN:phoneNumber}, 
+	 db.listin.findOne({ NVOMSISDN: parseInt(phoneNumber) }, 
 			 function(err,doc)
 			 {
 				 if (err) deferred.reject(err.name + ': ' + err.message);
