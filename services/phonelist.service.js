@@ -16,11 +16,11 @@ function findOne(phoneNumber)
 {
 	 var deferred = Q.defer();
 	 db.listin.findOne({ NVOMSISDN: parseInt(phoneNumber) }, 
-			 function(err,doc)
+			 function(err,result)
 			 {
 				 if (err) deferred.reject(err.name + ': ' + err.message);
 				 
-				 deferred.resolve();
+				 deferred.resolve(result);
 			 });
 	 return deferred.promise;
 }

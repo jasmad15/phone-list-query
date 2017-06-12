@@ -24,7 +24,7 @@
         function findNumber() {
              PhoneListService.findNumber(vm.listin)
                 .then(function (data) {
-                    FlashService.Success('Usuario Actualizado');
+                    FlashService.Success(data.TIPO);
                 })
                 .catch(function (error) {
                     FlashService.Error(error);
