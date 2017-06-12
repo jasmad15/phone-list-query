@@ -2,6 +2,7 @@
 var express = require('express');
 var router = express.Router();
 var userService = require('services/user.service');
+var logger = require('services/logger.service');
 
 //routes
 router.post('/authenticate', authenticateUser);
@@ -15,10 +16,14 @@ module.exports = router;
 
 function authenticateUser(req, res) {
 	userService.authenticate(req.body.username, req.body.password)
+	
 	.then(function (token) {
 		if (token) {
+			writeUserLog(req,res,'INICIO_SESION_EXITO');
 			res.send({ token: token });
+			
 		} else {
+			writeUserLog(req,res,'INICIO_SESION_ERROR');
 			res.status(401).send('El usuario o contraseña no es correcta');
 		}
 	})
@@ -30,6 +35,7 @@ function authenticateUser(req, res) {
 function registerUser(req, res) {
 	userService.create(req.body)
 	.then(function () {
+		writeUserLog(req,res,'ALTA_USUARIO');
 		res.sendStatus(200);
 	})
 	.catch(function (err) {
@@ -40,6 +46,7 @@ function registerUser(req, res) {
 function findUsers(req, res) {
 	userService.getByFilter(req.body)
 	.then(function (users) {
+		writeUserLog(req,res,'BUSQUEDA_USUARIO');
 		res.status(200).send(users);
 	})
 	.catch(function (err) {
@@ -61,16 +68,39 @@ function getCurrentUser(req, res) {
 	});
 }
 
+
+function writeUserLog(req, res, action)
+{
+	//primero obtenemos el usuario
+	var username = '';
+	userService.getById(req.user.sub).then(function (user) {
+		if (user) {
+			username = user.username;
+			var log = new Object();
+			log.date = new Date();
+			log.action = action
+			log.username = username;
+			logger.insert(log);
+			
+		} else {
+			res.sendStatus(404);
+		}
+	})
+	.catch(function (err) {
+		res.status(400).send(err);
+	});
+}
+
 function updateUser(req, res) {
 
 	userService.getById(req.user.sub).then(function (user) {
 		if (user) {
 			if (user.profile != 1 && user.createdBy == req.body.createBy) {
-				// can only update own account
 				return res.status(401).send('You can only update your own account');
 			}
 			userService.update(userId, req.body)
 			.then(function () {
+				writeUserLog(req,res,'ACTUALIZACION_USUARIO');
 				res.sendStatus(200);
 			})
 			.catch(function (err) {
@@ -89,13 +119,10 @@ function updateUser(req, res) {
 
 function deleteUser(req, res) {
 	var userId = req.user.sub;
-	if (req.params._id !== userId) {
-		// can only delete own account
-		return res.status(401).send('You can only delete your own account');
-	}
-
+	
 	userService.delete(userId)
 	.then(function () {
+		writeUserLog(req,res,'BORRADO_USUARIO');
 		res.sendStatus(200);
 	})
 	.catch(function (err) {
