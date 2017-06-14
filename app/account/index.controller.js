@@ -9,6 +9,7 @@
         var vm = this;
 
         vm.user = null;
+        vm.currentUser = null;
         vm.saveUser = saveUser;
         vm.deleteUser = deleteUser;
         vm.insertUpdate = createUser;
@@ -18,11 +19,11 @@
         initController();
 
         function initController() {
-            /*
+            
             UserService.GetCurrent().then(function (user) {
-                vm.user = user;
+                vm.currentUser = user;
             });
-            */
+            
         }
 
         function saveUser() {
