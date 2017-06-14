@@ -55,7 +55,7 @@ function getById(_id) {
 }
 
 function getByFilter(_user) {
-    var deferred = Q.defer();s
+    var deferred = Q.defer();
 
     db.users.find({"username":_user.username}, function (err, users) {
         if (err) deferred.reject(err.name + ': ' + err.message);
