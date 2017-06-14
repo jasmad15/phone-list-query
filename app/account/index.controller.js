@@ -12,7 +12,7 @@
         vm.currentUser = null;
         vm.saveUser = saveUser;
         vm.deleteUser = deleteUser;
-        vm.insertUpdate = createUser;
+        vm.createUser = createUser;
         vm.findUser = findUser;
 
 
