@@ -19,152 +19,154 @@ service.getByFilter = getByFilter;
 module.exports = service;
 
 function authenticate(username, password) {
-    var deferred = Q.defer();
-   // deferred.resolve(jwt.sign({ sub: 123456 }, config.secret));
-    
-    db.users.findOne({ username: username }, function (err, user) {
-        if (err) deferred.reject(err.name + ': ' + err.message);
+	var deferred = Q.defer();
+	// deferred.resolve(jwt.sign({ sub: 123456 }, config.secret));
 
-        if (user && bcrypt.compareSync(password, user.hash)) {
-            // authentication successful
-            deferred.resolve(jwt.sign({ sub: user._id }, config.secret));
-        } else {
-            // authentication failed
-            deferred.resolve();
-        }
-    });
+	db.users.findOne({ username: username }, function (err, user) {
+		if (err) deferred.reject(err.name + ': ' + err.message);
 
-    return deferred.promise;
+		if (user && bcrypt.compareSync(password, user.hash)) {
+			// authentication successful
+			deferred.resolve(jwt.sign({ sub: user._id }, config.secret));
+		} else {
+			// authentication failed
+			deferred.resolve();
+		}
+	});
+
+	return deferred.promise;
 }
 
 function getById(_id) {
-    var deferred = Q.defer();
+	var deferred = Q.defer();
 
-    db.users.findById(_id, function (err, user) {
-        if (err) deferred.reject(err.name + ': ' + err.message);
+	db.users.findById(_id, function (err, user) {
+		if (err) deferred.reject(err.name + ': ' + err.message);
 
-        if (user) {
+		if (user) {
 
-            deferred.resolve(_.omit(user, 'hash'));
-        } else {
-            deferred.resolve();
-        }
-    });
+			deferred.resolve(_.omit(user, 'hash'));
+		} else {
+			deferred.resolve();
+		}
+	});
 
-    return deferred.promise;
+	return deferred.promise;
 }
 
 function getByFilter(_user) {
-    var deferred = Q.defer();
+	var deferred = Q.defer();
 
-    db.users.find({"username":_user.username}, function (err, users) {
-        if (err) deferred.reject(err.name + ': ' + err.message);
+	db.users.find(_user).toArray(function(err, users){
+		if (err){
+			deferred.reject(err.name + ': ' + err.message);
+		}
 
-        if (users) {
+		if (users) {
 
-            deferred.resolve(users);
-        } else {
-            deferred.resolve();
-        }
-    });
+			deferred.resolve(users);
+		} else {
+			deferred.resolve();
+		}
+	});
 
-    return deferred.promise;
+	return deferred.promise;
 }
 
 function create(userParam) {
-    var deferred = Q.defer();
+	var deferred = Q.defer();
 
 
-    db.users.findOne(
-        { username: userParam.username },
-        function (err, user) {
-            if (err) deferred.reject(err.name + ': ' + err.message);
+	db.users.findOne(
+			{ username: userParam.username },
+			function (err, user) {
+				if (err) deferred.reject(err.name + ': ' + err.message);
 
-            if (user) {
-                deferred.reject('El usuario "' + userParam.username + '" ya esta dado de alta');
-            } else {
-                createUser();
-            }
-        });
+				if (user) {
+					deferred.reject('El usuario "' + userParam.username + '" ya esta dado de alta');
+				} else {
+					createUser();
+				}
+			});
 
-    function createUser() {
-        
-        var user = _.omit(userParam, 'password');
+	function createUser() {
 
-        user.hash = bcrypt.hashSync(userParam.password, 10);
+		var user = _.omit(userParam, 'password');
 
-        db.users.insert(
-            user,
-            function (err, doc) {
-                if (err) deferred.reject(err.name + ': ' + err.message);
+		user.hash = bcrypt.hashSync(userParam.password, 10);
 
-                deferred.resolve();
-            });
-    }
+		db.users.insert(
+				user,
+				function (err, doc) {
+					if (err) deferred.reject(err.name + ': ' + err.message);
 
-    return deferred.promise;
+					deferred.resolve();
+				});
+	}
+
+	return deferred.promise;
 }
 
 function update(_id, userParam) {
-    var deferred = Q.defer();
+	var deferred = Q.defer();
 
-    // validation
-    db.users.findById(_id, function (err, user) {
-        if (err) deferred.reject(err.name + ': ' + err.message);
+	// validation
+	db.users.findById(_id, function (err, user) {
+		if (err) deferred.reject(err.name + ': ' + err.message);
 
-        if (user.username !== userParam.username) {
-            db.users.findOne(
-                { username: userParam.username },
-                function (err, user) {
-                    if (err) deferred.reject(err.name + ': ' + err.message);
+		if (user.username !== userParam.username) {
+			db.users.findOne(
+					{ username: userParam.username },
+					function (err, user) {
+						if (err) deferred.reject(err.name + ': ' + err.message);
 
-                    if (user) {
-                        deferred.reject('El usuario "' + req.body.username + '" ya esta dado de alta')
-                    } else {
-                        updateUser();
-                    }
-                });
-        } else {
-            updateUser();
-        }
-    });
+						if (user) {
+							deferred.reject('El usuario "' + req.body.username + '" ya esta dado de alta')
+						} else {
+							updateUser();
+						}
+					});
+		} else {
+			updateUser();
+		}
+	});
 
-    function updateUser() {
-        // fields to update
-        var set = {
-            firstName: userParam.firstName,
-            lastName: userParam.lastName,
-            username: userParam.username,
-        };
+	function updateUser() {
+		// fields to update
+		var set = {
+				firstName: userParam.firstName,
+				lastName: userParam.lastName,
+				username: userParam.username,
+		};
 
-        // update password if it was entered
-        if (userParam.password) {
-            set.hash = bcrypt.hashSync(userParam.password, 10);
-        }
+		// update password if it was entered
+		if (userParam.password) {
+			set.hash = bcrypt.hashSync(userParam.password, 10);
+		}
 
-        db.users.update(
-            { _id: mongo.helper.toObjectID(_id) },
-            { $set: set },
-            function (err, doc) {
-                if (err) deferred.reject(err.name + ': ' + err.message);
+		db.users.update(
+				{ _id: mongo.helper.toObjectID(_id) },
+				{ $set: set },
+				function (err, doc) {
+					if (err) deferred.reject(err.name + ': ' + err.message);
 
-                deferred.resolve();
-            });
-    }
+					deferred.resolve();
+				});
+	}
 
-    return deferred.promise;
+	return deferred.promise;
 }
 
 function _delete(_id) {
-    var deferred = Q.defer();
+	var deferred = Q.defer();
 
-    db.users.remove(
-        { _id: mongo.helper.toObjectID(_id) },
-        function (err) {
-            if (err) deferred.reject(err.name + ': ' + err.message);
+	db.users.remove(
+			{ _id: mongo.helper.toObjectID(_id) },
+			function (err) {
+				if (err) deferred.reject(err.name + ': ' + err.message);
 
-            deferred.resolve();
-        });
+				deferred.resolve();
+			});
 
-    return deferred.promise;
+	return deferred.promise;
 }
