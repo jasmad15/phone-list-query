@@ -27,6 +27,11 @@ app.get('/', function (req, res) {
     return res.redirect('/app');
 });
 
+
+process.on('SIGINT', function () {
+	  console.log('Recibido SIGINT.  Haz Control-D para salir.');
+	});
+
 var server = app.listen(3000, function () {
     console.log('Server listening at http://' + server.address().address + ':' + server.address().port);
 });
