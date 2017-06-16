@@ -7,7 +7,8 @@
 
     function Controller($window, UserService, FlashService) {
         var vm = this;
-
+        
+        vm.agencia = null;
         vm.user = null;
         vm.currentUser = null;
         vm.saveUser = saveUser;
@@ -24,6 +25,9 @@
             
             UserService.GetCurrent().then(function (user) {
                 vm.currentUser = user;
+            	//Con poner aqui el nombre de la agencia el funcionamiento sera igual
+                vm.agencia = vm.currentUser.username;
+                findListUsers();
             });
             
         }
@@ -60,20 +64,16 @@
         }
         
         function findListUsers(){
-        	vm.user.superiorUser = vm.currentUser.username;
-        	delete vm.user.lastName;
-        	delete vm.user.firstName;
-        	delete vm.user.lastName;
-        	delete vm.user.password;
+        	var text = '{\"superiorUser\":\"' + vm.agencia + '\"}';
+        	var obj = JSON.parse(text);
         	
-            UserService.GetByFilter(vm.user)
+            UserService.GetByFilter(obj)
             .then(function (user) {
             	if (user.length > 0) {
             		//Proceso de carga de la lista
             		vm.userList = user;
             	} else {
-            		FlashService.Error('Usuario no localizado');
-            		emtyFields();
+            		FlashService.Error('Agencia sin usuarios');
             	}
             })
             .catch(function (error) {
@@ -84,8 +84,8 @@
         
         function findUser() {
         	//Esto en teoria no deberia ser necesario
-        	//delete vm.user.lastName;
-        	//delete vm.user.firstName;
+        	delete vm.user.lastName;
+        	delete vm.user.firstName;
         	
             UserService.GetByFilter(vm.user)
                 .then(function (user) {
