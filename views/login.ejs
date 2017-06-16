@@ -1,25 +1,31 @@
-﻿<%- include('partials/header') %>
-<div class="form-container">
-    <h2>Login</h2>
-    <% if(locals.error) { %>
-        <div class="alert alert-danger"><%= error %></div>
-    <% } %>
-    <% if(locals.success) { %>
-        <div class="alert alert-success"><%= success %></div>
-    <% } %>
-    <form method="post">
-        <div class="form-group">
-            <label for="username">Usuario</label>
-            <input type="text" name="username" id="username" value="<%= locals.username || '' %>" class="form-control" />
+<%- include('partials/header') %>
+<div class="container">
+        <div class="card card-2 col-xs-12 col-md-8 col-md-offset-2">
+            <h2 class="titulo-web">Validador.es</h2>
+            <hr class="hr-titulo-web">
+            <% if(locals.error) { %>
+                <div class="alert alert-danger"><%= error %></div>
+            <% } %>
+            <% if(locals.success) { %>
+                <div class="alert alert-success"><%= success %></div>
+            <% } %>
+            <form method="post" class="form-signin">
+                <input type="text" name="username" id="username" value="<%= locals.username || '' %>" class="form-control user-login" placeholder="Usuario"  required autofocus/>
+                <input type="password" name="password" id="password" placeholder="Password"  required class="form-control" />
+                <p class="btnCentrado"><button type="submit" class="btn btn-primary" id="btnLogin"></button></p>
+            </form>
         </div>
-        <div class="form-group">
-            <label for="password">Contrase&ntilde;a</label>
-            <input type="password" name="password" id="password" class="form-control" />
-        </div>
-        <div class="form-group" ">
-            <button type="submit" class="btn btn-primary">Login</button>
-            <a href="/register" class="btn btn-link" >registrar</a>
-        </div>
-    </form>
 </div>
+
+<!--
+      <form class="form-signin">
+        <h2 class="form-signin-heading">Validador.es</h2>
+        <label for="inputEmail" class="sr-only">Usuario</label>
+        <input type="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      </form>
+-->
+
 <%- include('partials/footer') %>
