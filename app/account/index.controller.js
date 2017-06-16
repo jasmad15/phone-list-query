@@ -14,6 +14,7 @@
         vm.deleteUser = deleteUser;
         vm.createUser = createUser;
         vm.findUser = findUser;
+        vm.findListUsers = findListUsers;
         vm.userList = null;
 
 
