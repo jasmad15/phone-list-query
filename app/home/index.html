@@ -1,4 +1,4 @@
-<h1>Hi {{vm.user.firstName}}!!</h1>
+<!-- <h1>Hi {{vm.user.firstName}}!!</h1>
 
 <div class="form-container">
 	<form method="post">
@@ -12,3 +12,99 @@
 		</div>
 	</form>
 </div>
+-->
+<div class="container side-collapse-container"> 
+	<div class="row">
+     <div class="card card-2 card-search col-xs-12 col-md-10 col-md-offset-1">
+
+   	<div class="row">
+   		<div class="col-md-5" id="inputMobile-panel">
+   			<div class="row">
+   				<!-- <h1>{{vm.user.firstName}}</h1> -->
+   				<h4>Introduce el n&uacute;mero a validar</h4>
+   			</div>
+    		<div class="row">
+    			<form method="post" class="">
+    				<div class="col-md-10" id="inputMobile-number-panel">
+    					<input type="text" pattern="[6-7]{1}[0-9]{8}" name="phoneValidate" id="phoneValidate" ng-model="vm.listin.NVOMSISDN" value="" class="form-control" placeholder="000000000" maxlength="9" size="10" required autofocus/>
+    					<!-- 9 digitos y el primero solo puede ser 6 o 7 -->
+    				</div>
+    				<div class="col-md-2" id="inputMobile-btn-panel">
+    					<!-- <button type="submit" class="btn btn-primary" id="btnSearch"></button>  -->
+    					<button  ng-click="vm.findNumber()" class="btn btn-primary" id="btnSearch"></button>
+    				</div>
+    			</form>
+    		</div>		     			
+   		</div>
+   		<div class="col-md-7" id="responseMobile-panel">
+   			<div id="response-empty" class="response-panel">
+   				<p><strong>OK</strong> a la venta de cualquier terminal a este cliente (<span id="response-empty-phoneSearch">000000000</span>)</p>
+   				<p>Grabar con Sfid <strong>ACTUAL</strong></p>
+   			</div>
+   			<div id="response-a" class="response-panel">
+   				<p><strong>OK</strong> a la venta de cualquier terminal a este cliente (<span id="response-a-phoneSearch">000000000</span>)</p>
+   				<p>Grabar con Sfid <strong>ALTO RIESGO</strong></p>
+   			</div>
+   			<div id="response-g" class="response-panel">
+   				<p>Vender SIMO o terminales Vodafone a este cliente (<span id="response-g-phoneSearch">000000000</span>)</p>
+   				<p>En caso de querer otro terminal:</br>NO SE FINANCIA - Pagar al contado</p>
+   				<p>Grabar con Sfid <strong>ALTO RIESGO</strong></p>
+   			</div>		     					     			
+   		</div>
+   	</div>
+   	<div class="row" id="spinner">
+   		<!--<img src="../img/spinnerTNP.svg"/>-->
+   		<object type="image/svg+xml" data="../img/spinnerTNP.svg" class="logo">
+				Spinner TNP <!-- fallback image in CSS -->
+	</object>
+   	</div>
+   	<div class="row">
+   		<div class="col-md-12" id="messageMobile-panel"><strong>Argumentario: </strong>Recuerde que, por motivos de seguridad, tendrá que estar usted presente a la hora de recibir el pedido y tener a mano su documento de identidad original</div>
+   	</div> 
+         <!--
+         <form method="post" class="form-signin">
+             <input type="text" name="phone" id="phone" value="" class="form-control" placeholder="Teléfono a buscar" maxlength="9" size="10" required autofocus/>
+             <p class="btnCentrado"><button type="submit" class="btn btn-primary" id="btnLogin"></button></p>
+         </form>
+         -->
+     </div>
+    </div>
+</div>
+<script type="text/javascript">
+	function initPanels() {
+		//Inicializamos los paneles. Lo normal es que sea al entrar en el propio campo y como minimo al pulsar sobre el boton de busqueda
+		/*
+		$('#response-empty').css('display','none');
+		$('#response-a').css('display','none');
+		$('#response-g').css('display','none');
+		$('#messageMobile-panel').css('display','none');
+		*/
+		$('#response-empty').hide(1000);
+		$('#response-a').hide(1000);
+		$('#response-g').hide(1000);
+		$('#messageMobile-panel').css('display','none');
+		//El spinner tambien por si se hubiese quedado por ahi
+		$('#spinner').css('display','none');
+	}
+	function resultSearchProcess(resultado, phoneNumber) {
+		//Mostramos los paneles segun la respuest aque debuelva la consulta
+		$('#spinner').css('display','none');
+		if (resultado === "A") {
+			$('#response-empty').css('display','block');
+			$('#response-empty-phoneSearch').html(phoneNumber);
+		} else if (resultado === "B") {
+			$('#response-a').css('display','block');
+			$('#response-a-phoneSearch').html(phoneNumber);
+		} else if (resultado === null || resultado === undefined) {
+			$('#response-g').css('display','block');
+			$('#response-g-phoneSearch').html(phoneNumber);
+		}
+		$('#messageMobile-panel').css('display','block');	
+	}
+	$(document).ready(function(){
+		//Inicializamos los paneles cuando vuelve a entrar en el campo. Damos por hecho que quiere una nueva consulta
+    	$("#phoneValidate").focusin(function(){
+        	initPanels();
+    	});
+	});
+</script>
