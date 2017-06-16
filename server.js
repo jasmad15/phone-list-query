@@ -22,6 +22,8 @@ app.use('/app', require('./controllers/app.controller'));
 app.use('/api/users', require('./controllers/api/users.controller'));
 //faltan los de logs y la consulta
 
+//ficheros estaticos ESTO
+app.use(express.static('public'));
 
 app.get('/', function (req, res) {
     return res.redirect('/app');
