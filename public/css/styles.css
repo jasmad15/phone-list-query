@@ -1,0 +1,336 @@
+body {
+  padding-top: 50px;
+  padding-bottom: 40px;
+  background-color: #eee;
+  position: relative;
+}
+pre {
+    tab-size: 8;
+}
+h4 {
+    font-family: Lato;
+    font-weight: 300;
+    font-size: 18pt;
+    color: #333333;
+    padding-left: 15px;
+    border-bottom: 1px solid #333333;
+    padding-bottom: 20px;
+    margin-bottom: 45px;    
+}
+.form-control:focus {
+  -webkit-box-shadow: none;  
+  box-shadow: none;
+}
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-signin-heading {
+  font-family: Lato;
+  font-weight: 100;
+  font-size: 72pt;
+  color: #b81800;
+  text-align: center;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 0;
+  border: 1px solid #b81800;
+  padding: 15px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: 15px;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 15px;
+}
+/* Inputs */
+.form-control, .form-control:focus {
+    border-radius: 0;
+    border: 1px solid #b81800;
+}
+.form-field {
+  font-family: Lato;
+  font-weight: 300;
+  font-size: 30pt;
+  color: #999999;
+  height: 60px;
+  width: 400px;
+  margin-top: 10px;
+}
+.user-login {
+  font-weight: 300;
+  font-size: 30pt;	
+}
+#inputEmail, 
+#username, .user-login {
+  background: white url('../img/icnUsuario.png') 14px center no-repeat;
+  padding-left: 60px !important;
+  margin-bottom: 15px;
+  font-family: Lato;
+  font-weight: 300;
+  font-size: 30pt;
+  color: #999999;
+}
+#inputPassword, #password {
+  background: white url('../img/icnPass.png') 14px center no-repeat;
+  padding-left: 60px;
+  margin-bottom: 15px;
+  font-family: Lato;
+  font-weight: 300;
+  font-size: 30pt;
+  color: #999999;
+}
+#phoneValidate {
+  font-family: Lato;
+  font-weight: 300;
+  font-size: 36pt;
+  height: 60px;
+  width: 290px;
+}
+#phoneValidate:focus {
+  color: #333333;
+}
+/* FIN - inputs */
+/* Botones */
+button {
+  width: 31px;
+  border: none;
+  height: 30px;  
+}
+button#btnLogin {
+  background: white url('../img/btnEntrar.png') left no-repeat;
+  width: 60px;
+  border: none;
+  height: 60px;
+}
+button#btnSearch {
+  background: white url('../img/btnValidar.png') left no-repeat;
+  position: absolute;
+  top: 10px;
+  border-color: transparent;  
+}
+button#btnPlus {
+  background: white url('../img/btnBuevoUsr.png') left no-repeat;
+  position: absolute;
+  top: 10px;
+  border-color: transparent;
+}
+#btnClose {
+    background: white url(../img/btnCierre.png) right 1px no-repeat;
+    top: 10px;
+    border-color: transparent;
+    width: 31px;
+    border: none;
+    height: 32px;
+    float: right;
+    padding-right: 95px;
+    margin-top: 8px;
+     
+}
+a#btnClose {
+    color: #999999;
+    font-family: Lato;
+    font-weight: 300;
+    font-size: 18pt;
+    text-decoration: none;
+}
+p.btnCentrado {
+    text-align: center;
+}
+/* FIN - Botones */
+.titulo-web {
+  font-family: Lato;
+  font-weight: 100;
+  font-size: 72pt;
+  color: #b81800;
+  text-align: center;
+}
+hr.hr-titulo-web {
+    width: 35%;
+    border-top: 1px solid #333333;
+}
+.card {
+  background: #fff;
+  border-radius: 2px;
+  display: inline-block;
+  position: relative;
+  padding: 50px 0px;
+  margin-top: 5px;
+}
+.card-2 {
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+.card-search {
+  margin-top: 20px;
+  height: auto;
+  min-height: 500px;
+}
+/* Paneles de busqueda */
+div#inputMobile-panel {
+    padding-left: 50px;
+    padding-bottom: 15px;
+}
+div#responseMobile-panel {
+}
+.response-panel {
+    color: #ffffff;
+    padding: 15px;
+    margin: 0 10px;
+    font-family: Lato;
+    font-weight: 100;
+    font-size: 24pt;
+    /*font-size: 28pt;*/ //Este es el tamaño que ellos quieren pero quizas sea un poco grande
+}
+div#response-empty {
+    background-color: #007c92;
+    display: none;
+}
+div#response-a {
+    background-color: #999999;
+    display: none;
+}
+div#response-g {
+    background-color: #B81800;
+    display: none;
+}
+.response-panel p {
+    padding-top: 25px;
+}
+div#messageMobile-panel {
+    display: none;
+    margin-top: 30px;
+    padding-left: 50px;
+    padding-bottom: 15px;
+    color: #333333;
+    font-family: Lato;
+    font-weight: 100;
+    font-size: 24pt;
+    /*font-size: 28pt;*/ //Este es el tamaño que ellos quieren pero quizas sea un poco grande
+}
+#spinner {
+    display: none;
+    text-align: center;
+    padding: 50px;
+}
+/* FIN - Paneles de la busqueda */
+/* Menu lateral */
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 15px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+
+}
+
+.sidenav a:hover{
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+.navbar-inverse {
+    background-color: #fff;
+    border-bottom-color: #b81800;
+}
+.navbar-inverse .navbar-brand {
+    color: #b81800;
+    font-family: Lato;
+    font-size: 20pt;
+    font-weight: 100;
+}
+.navbar-inverse .navbar-brand:focus, .navbar-inverse .navbar-brand:hover {
+    color: #b81800;
+    background-color: transparent;
+}
+span#hamburger-menu {
+    color: #b81800;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+/* FIN - Menu lateral */
+/* Ajsutes a bootstrap */
+.alert {
+    margin-left: 25px;
+    margin-right: 25px;
+    border-radius: 0;
+}
+.alert-danger {
+    color: #b81800;
+    }
+/*FIN - Ajsutes a bootstrap */
+/* Mobile */
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+  .titulo-web {
+    font-size: 45pt; 
+  }
+  hr.hr-titulo-web {
+    width: 45%;
+  }
+  input[type=text] {
+    font-size: 20pt;
+  }
+  .side-collapse-container{
+      width:100%;
+      position:relative;
+      left:0;
+      transition:left .4s;
+  }
+  .side-collapse-container.out{
+      left:200px;
+  }
+  .side-collapse {
+      top:50px;
+      bottom:0;
+      left:0;
+      width:200px;
+      position:fixed;
+      overflow:hidden;
+      transition:width .4s;
+  }
+  .side-collapse.in {
+      width:0;
+  }  
+}
+/* FIN - Mobile */

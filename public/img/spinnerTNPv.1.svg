@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   id="svg38"
+   version="1.1"
+   class="lds-square"
+   preserveAspectRatio="xMidYMid"
+   viewBox="0 0 100 100"
+   height="105px"
+   width="105px">
+  <metadata
+     id="metadata44">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs42" />
+  <g
+     id="g4"
+     transform="translate(20 20)">
+    <rect
+       id="rect2"
+       transform="scale(1 1)"
+       fill="#b81800"
+       height="30"
+       width="30"
+       y="-15"
+       x="-15">
+      <animateTransform
+         repeatCount="indefinite"
+         begin="-0.4s"
+         keySplines="0.5 0.5 0.5 0.5;0 0.1 0.9 1;0.1 0 1 0.9;0.5 0.5 0.5 0.5"
+         dur="1s"
+         keyTimes="0;0.2;0.5;0.8;1"
+         values="1;1;0.2;1;1"
+         calcMode="spline"
+         type="scale"
+         attributeName="transform" />
+    </rect>
+  </g>
+  <g
+     id="g8"
+     transform="translate(50 20)">
+    <rect
+       id="rect6"
+       transform="scale(0.818385 0.818385)"
+       fill="#e02003"
+       height="30"
+       width="30"
+       y="-15"
+       x="-15">
+      <animateTransform
+         repeatCount="indefinite"
+         begin="-0.3s"
+         keySplines="0.5 0.5 0.5 0.5;0 0.1 0.9 1;0.1 0 1 0.9;0.5 0.5 0.5 0.5"
+         dur="1s"
+         keyTimes="0;0.2;0.5;0.8;1"
+         values="1;1;0.2;1;1"
+         calcMode="spline"
+         type="scale"
+         attributeName="transform" />
+    </rect>
+  </g>
+  <g
+     id="g12"
+     transform="translate(80 20)">
+    <rect
+       id="rect10"
+       transform="scale(0.540107 0.540107)"
+       fill="#ff3c1f"
+       height="30"
+       width="30"
+       y="-15"
+       x="-15">
+      <animateTransform
+         repeatCount="indefinite"
+         begin="-0.2s"
+         keySplines="0.5 0.5 0.5 0.5;0 0.1 0.9 1;0.1 0 1 0.9;0.5 0.5 0.5 0.5"
+         dur="1s"
+         keyTimes="0;0.2;0.5;0.8;1"
+         values="1;1;0.2;1;1"
+         calcMode="spline"
+         type="scale"
+         attributeName="transform" />
+    </rect>
+  </g>
+  <g
+     id="g16"
+     transform="translate(20 50)">
+    <rect
+       id="rect14"
+       transform="scale(0.818385 0.818385)"
+       fill="#e02003"
+       height="30"
+       width="30"
+       y="-15"
+       x="-15">
+      <animateTransform
+         repeatCount="indefinite"
+         begin="-0.3s"
+         keySplines="0.5 0.5 0.5 0.5;0 0.1 0.9 1;0.1 0 1 0.9;0.5 0.5 0.5 0.5"
+         dur="1s"
+         keyTimes="0;0.2;0.5;0.8;1"
+         values="1;1;0.2;1;1"
+         calcMode="spline"
+         type="scale"
+         attributeName="transform" />
+    </rect>
+  </g>
+  <g
+     id="g20"
+     transform="translate(50 50)">
+    <rect
+       id="rect18"
+       transform="scale(0.540107 0.540107)"
+       fill="#ff3c1f"
+       height="30"
+       width="30"
+       y="-15"
+       x="-15">
+      <animateTransform
+         repeatCount="indefinite"
+         begin="-0.2s"
+         keySplines="0.5 0.5 0.5 0.5;0 0.1 0.9 1;0.1 0 1 0.9;0.5 0.5 0.5 0.5"
+         dur="1s"
+         keyTimes="0;0.2;0.5;0.8;1"
+         values="1;1;0.2;1;1"
+         calcMode="spline"
+         type="scale"
+         attributeName="transform" />
+    </rect>
+  </g>
+  <g
+     id="g24"
+     transform="translate(80 50)">
+    <rect
+       id="rect22"
+       transform="scale(0.291854 0.291854)"
+       fill="#ff614a"
+       height="30"
+       width="30"
+       y="-15"
+       x="-15">
+      <animateTransform
+         repeatCount="indefinite"
+         begin="-0.1s"
+         keySplines="0.5 0.5 0.5 0.5;0 0.1 0.9 1;0.1 0 1 0.9;0.5 0.5 0.5 0.5"
+         dur="1s"
+         keyTimes="0;0.2;0.5;0.8;1"
+         values="1;1;0.2;1;1"
+         calcMode="spline"
+         type="scale"
+         attributeName="transform" />
+    </rect>
+  </g>
+  <g
+     id="g28"
+     transform="translate(20 80)">
+    <rect
+       id="rect26"
+       transform="scale(0.540107 0.540107)"
+       fill="#ff3c1f"
+       height="30"
+       width="30"
+       y="-15"
+       x="-15">
+      <animateTransform
+         repeatCount="indefinite"
+         begin="-0.2s"
+         keySplines="0.5 0.5 0.5 0.5;0 0.1 0.9 1;0.1 0 1 0.9;0.5 0.5 0.5 0.5"
+         dur="1s"
+         keyTimes="0;0.2;0.5;0.8;1"
+         values="1;1;0.2;1;1"
+         calcMode="spline"
+         type="scale"
+         attributeName="transform" />
+    </rect>
+  </g>
+  <g
+     id="g32"
+     transform="translate(50 80)">
+    <rect
+       id="rect30"
+       transform="scale(0.291854 0.291854)"
+       fill="#ff614a"
+       height="30"
+       width="30"
+       y="-15"
+       x="-15">
+      <animateTransform
+         repeatCount="indefinite"
+         begin="-0.1s"
+         keySplines="0.5 0.5 0.5 0.5;0 0.1 0.9 1;0.1 0 1 0.9;0.5 0.5 0.5 0.5"
+         dur="1s"
+         keyTimes="0;0.2;0.5;0.8;1"
+         values="1;1;0.2;1;1"
+         calcMode="spline"
+         type="scale"
+         attributeName="transform" />
+    </rect>
+  </g>
+  <g
+     id="g36"
+     transform="translate(80 80)">
+    <rect
+       id="rect34"
+       transform="scale(0.291854 0.291854)"
+       fill="#ff816e"
+       height="30"
+       width="30"
+       y="-15"
+       x="-15">
+      <animateTransform
+         repeatCount="indefinite"
+         begin="0s"
+         keySplines="0.5 0.5 0.5 0.5;0 0.1 0.9 1;0.1 0 1 0.9;0.5 0.5 0.5 0.5"
+         dur="1s"
+         keyTimes="0;0.2;0.5;0.8;1"
+         values="1;1;0.2;1;1"
+         calcMode="spline"
+         type="scale"
+         attributeName="transform" />
+    </rect>
+  </g>
+</svg>
