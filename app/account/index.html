@@ -61,7 +61,7 @@
 								<div class="form-group">
 						             <button class="btn btn-primary" ng-click="vm.createUser()" id="btnPlus"></button>
 								</div>
-							</div>							
+							</div>
 						</div>
 						<hr>
 						<div class="row">
@@ -81,10 +81,34 @@
 							</div>							
 						</div>
 						<div class="row">
-							<div class="col-md-6">						
-								<h1 ng-repeat="x in vm.userList">{{x.username}}</h1>
+							<div class="col-md-12">
+								<div class="row user-row red">
+									<div class="col-md-5">
+										Nombre
+									</div>
+									<div class="col-md-5">
+										Usuario
+									</div>
+									<div class="col-md-2">
+										Baja
+									</div>																		
+								</div>
+								<div class="row user-row grey" ng-repeat="x in vm.userList" ng-class="{even: $even, odd: $odd}">
+									<div class="col-md-5">
+										{{x.firstName}}
+									</div>
+									<div class="col-md-5">
+										{{x.username}}
+									</div>
+									<div class="col-md-2">
+										<span class="btnDelete" ng-click="vm.deleteUser(x._id)"></span>
+									</div>																		
+								</div>																					
+								<!-- <h1 ng-repeat="x in vm.userList">
+									{{x.firstName}} - {{x.username}} - <span class="btnDelete" ng-click="vm.deleteUser(x._id)"></span>
+								</h1> -->
 							</div>
-						</div>										
+						</div>				
 					</form>
 				</div>					
 			</div>
