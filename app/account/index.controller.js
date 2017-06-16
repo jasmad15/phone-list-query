@@ -8,7 +8,9 @@
     function Controller($window, UserService, FlashService) {
         var vm = this;
         
+        vm.filterField = "superiorUser";
         vm.agencia = null;
+        var objFilter = null;
         vm.user = null;
         vm.currentUser = null;
         vm.saveUser = saveUser;
@@ -27,6 +29,7 @@
                 vm.currentUser = user;
             	//Con poner aqui el nombre de la agencia el funcionamiento sera igual
                 vm.agencia = vm.currentUser.username;
+                objFilter = JSON.parse('{\"' + vm.filterField + '\":\"' + vm.agencia + '\"}');
                 findListUsers();
             });
             
@@ -53,8 +56,9 @@
                 });
         }
 
-        function deleteUser() {
-            UserService.Delete(vm.id)
+        function deleteUser(idUser) {
+        	//UserService.Delete(vm.id)
+            UserService.Delete(idUser)
                 .then(function () {
                 	FlashService.Success('Usuario borrado con exito');
                 })
@@ -64,10 +68,11 @@
         }
         
         function findListUsers(){
-        	var text = '{\"superiorUser\":\"' + vm.agencia + '\"}';
-        	var obj = JSON.parse(text);
+        	//var text = '{\"superiorUser\":\"' + vm.agencia + '\"}';
+        	//var obj = JSON.parse(text);
+        	//var objFilter = JSON.parse('{\"superiorUser\":\"' + vm.agencia + '\"}');
         	
-            UserService.GetByFilter(obj)
+            UserService.GetByFilter(objFilter)
             .then(function (user) {
             	if (user.length > 0) {
             		//Proceso de carga de la lista
