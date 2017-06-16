@@ -59,7 +59,7 @@
 	</object>
    	</div>
    	<div class="row">
-   		<div class="col-md-12" id="messageMobile-panel"><strong>Argumentario: </strong>Recuerde que, por motivos de seguridad, tendrá que estar usted presente a la hora de recibir el pedido y tener a mano su documento de identidad original</div>
+   		<div class="col-md-12" id="messageMobile-panel"><strong>Argumentario: </strong>Recuerde que, por motivos de seguridad, tendr&aacute; que estar usted presente a la hora de recibir el pedido y tener a mano su documento de identidad original</div>
    	</div> 
          <!--
          <form method="post" class="form-signin">
@@ -70,41 +70,3 @@
      </div>
     </div>
 </div>
-<script type="text/javascript">
-	function initPanels() {
-		//Inicializamos los paneles. Lo normal es que sea al entrar en el propio campo y como minimo al pulsar sobre el boton de busqueda
-		/*
-		$('#response-empty').css('display','none');
-		$('#response-a').css('display','none');
-		$('#response-g').css('display','none');
-		$('#messageMobile-panel').css('display','none');
-		*/
-		$('#response-empty').hide(1000);
-		$('#response-a').hide(1000);
-		$('#response-g').hide(1000);
-		$('#messageMobile-panel').css('display','none');
-		//El spinner tambien por si se hubiese quedado por ahi
-		$('#spinner').css('display','none');
-	}
-	function resultSearchProcess(resultado, phoneNumber) {
-		//Mostramos los paneles segun la respuest aque debuelva la consulta
-		$('#spinner').css('display','none');
-		if (resultado === "A") {
-			$('#response-empty').css('display','block');
-			$('#response-empty-phoneSearch').html(phoneNumber);
-		} else if (resultado === "B") {
-			$('#response-a').css('display','block');
-			$('#response-a-phoneSearch').html(phoneNumber);
-		} else if (resultado === null || resultado === undefined) {
-			$('#response-g').css('display','block');
-			$('#response-g-phoneSearch').html(phoneNumber);
-		}
-		$('#messageMobile-panel').css('display','block');	
-	}
-	$(document).ready(function(){
-		//Inicializamos los paneles cuando vuelve a entrar en el campo. Damos por hecho que quiere una nueva consulta
-    	$("#phoneValidate").focusin(function(){
-        	initPanels();
-    	});
-	});
-</script>
