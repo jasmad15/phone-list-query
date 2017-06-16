@@ -1,4 +1,4 @@
-<h1>Alta Usuario</h1>
+<!-- <h1>Alta Usuario</h1>
 <div class="form-container">
 	<form method="post">
 		<div class="form-group">
@@ -37,4 +37,54 @@
              <button class="btn btn-primary" ng-click="vm.findUser()">Buscar</button>
 		</div>
 	</form>
+</div>
+ -->
+ <div class="container side-collapse-container"> 
+   	<div class="row">
+        <div class="card card-2 card-search col-xs-12 col-md-10 col-md-offset-1">
+	     	<div class="row">
+	     		<div class="col-xs-10 col-md-11" id="inputMobile-panel">
+	     			<div class="row">	        
+        				<h4>Gesti&oacute;n de usuarios</h4>
+        			</div>
+					<form method="post">        			
+        				<div class="row">
+							<div class="col-md-6">
+								<input type="text" placeholder="nombre@dominio.xxx" class="form-control form-field" ng-model="vm.user.username"/>
+							</div>
+							<div class="col-xs-2 col-md-1">
+								<div class="form-group">
+						             <button class="btn btn-primary" ng-click="vm.findUser()" id="btnSearch"></button>
+								</div>
+							</div>
+							<div class="col-xs-6 col-md-1">
+								<div class="form-group">
+						             <button class="btn btn-primary" ng-click="vm.createUser()" id="btnPlus"></button>
+								</div>
+							</div>							
+						</div>
+						<hr>
+						<div class="row">
+							<div class="col-md-6">
+								<input type="text" id="firstName" placeholder="Nombre" class="form-control form-field" ng-model="vm.user.firstName" />
+							</div>
+							<div class="col-md-6">
+								<input type="text" id="superiorUser" placeholder="Supervisor" class="form-control form-field" ng-model="vm.user.superiorUser" />
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">		
+								<input type="password" id="password" placeholder="Password" class="form-control form-field" ng-model="vm.user.password" />
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">						
+								<h1 ng-repeat="x in vm.userList">{{x.username}}</h1>
+							</div>
+						</div>										
+					</form>
+				</div>					
+			</div>
+		</div>
+	</div>
 </div>
