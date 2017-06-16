@@ -141,8 +141,7 @@ button#btnPlus {
     height: 32px;
     float: right;
     padding-right: 95px;
-    margin-top: 8px;
-     
+    margin-top: 8px;    
 }
 a#btnClose {
     color: #999999;
@@ -150,6 +149,18 @@ a#btnClose {
     font-weight: 300;
     font-size: 18pt;
     text-decoration: none;
+}
+.btnDelete {
+    background: transparent url(../img/btnBaja.png) right 1px no-repeat;
+    cursor:pointer;
+    top: 10px;
+    border-color: transparent;
+    /*width: 31px;*/
+    border: none;
+    height: 32px;
+    float: right;
+    padding-right: 95px;
+    margin-top: 8px;	
 }
 p.btnCentrado {
     text-align: center;
@@ -168,7 +179,7 @@ hr.hr-titulo-web {
 }
 .card {
   background: #fff;
-  border-radius: 2px;
+  /*border-radius: 2px;*/
   display: inline-block;
   position: relative;
   padding: 50px 0px;
@@ -181,6 +192,32 @@ hr.hr-titulo-web {
   margin-top: 20px;
   height: auto;
   min-height: 500px;
+}
+/* Tabla lista usuarios */
+.user-row {
+	box-shadow: 0 1px 1px rgba(0,0,0,0.16), 0 1px 1px rgba(0,0,0,0.23);
+	margin: 10px;
+    height: 50px;
+}
+.user-row.red {
+    background-color: #b81800;
+    color: #ffffff;
+    font-family: Lato;
+    font-weight: 300;
+    font-size: 32pt;
+    height: 65px;
+}
+.even{
+    background-color: #ebebeb;
+}
+.odd{
+    background-color: #cccccc;
+}
+.user-row.grey {
+	color: #333333;
+    font-family: Lato;
+    font-weight: 300;
+    font-size: 22pt;	
 }
 /* Paneles de busqueda */
 div#inputMobile-panel {
