@@ -38,7 +38,8 @@
         function saveUser() {        	
             UserService.Update(vm.user)
                 .then(function () {
-                    FlashService.Success('Usuario Actualizado');                	
+                    FlashService.Success('Usuario Actualizado');
+                    emtyFields();
                 })
                 .catch(function (error) {
                     FlashService.Error(error);
@@ -50,6 +51,8 @@
             UserService.Create(vm.user)
                 .then(function () {
                     FlashService.Success('Usuario creado correctamente');
+                    findListUsers();
+                    emtyFields();
                 })
                 .catch(function (error) {
                     FlashService.Error(error);
@@ -61,17 +64,14 @@
             UserService.Delete(idUser)
                 .then(function () {
                 	FlashService.Success('Usuario borrado con exito');
+                	findListUsers();
                 })
                 .catch(function (error) {
                     FlashService.Error(error);
                 });
         }
         
-        function findListUsers(){
-        	//var text = '{\"superiorUser\":\"' + vm.agencia + '\"}';
-        	//var obj = JSON.parse(text);
-        	//var objFilter = JSON.parse('{\"superiorUser\":\"' + vm.agencia + '\"}');
-        	
+        function findListUsers(){        	
             UserService.GetByFilter(objFilter)
             .then(function (user) {
             	if (user.length > 0) {
@@ -94,10 +94,10 @@
         	
             UserService.GetByFilter(vm.user)
                 .then(function (user) {
-                    //FlashService.Success('Usuario Actualizado');
-            		vm.user.firstName = user[0].firstName;
-            		vm.user.superiorUser = user[0].superiorUser;
-            		vm.userList = user;                	
+            		//vm.user.firstName = user[0].firstName;
+            		//vm.user.superiorUser = user[0].superiorUser;
+            		vm.userList = user;
+            		emtyFields();
                 })
                 .catch(function (error) {
                     FlashService.Error(error);
@@ -108,7 +108,8 @@
     		vm.user.firstName = '';
     		vm.user.lastName = '';
     		vm.user.superiorUser = '';
-    		vm.user.password = '';       	
+    		vm.user.password = '';
+    		vm.user.agencia = '';
         }
         
     }
