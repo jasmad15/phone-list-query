@@ -133,15 +133,15 @@ button#btnPlus {
   border-color: transparent;
 }
 #btnClose {
-    background: white url(../img/btnCierre.png) right 1px no-repeat;
-    top: 10px;
+    background: white url(../img/btnCierre.png) right 12px no-repeat;
+    /*top: 10px;*/
     border-color: transparent;
-    width: 31px;
+    /*width: 31px;*/
     border: none;
-    height: 32px;
+    height: 44px;
     float: right;
     padding-right: 95px;
-    margin-top: 8px;    
+    /*margin-top: 8px;*/    
 }
 a#btnClose {
     color: #999999;
@@ -149,18 +149,19 @@ a#btnClose {
     font-weight: 300;
     font-size: 18pt;
     text-decoration: none;
+    width: auto;
 }
 .btnDelete {
     background: transparent url(../img/btnBaja.png) right 1px no-repeat;
     cursor:pointer;
     top: 10px;
     border-color: transparent;
-    /*width: 31px;*/
     border: none;
     height: 32px;
     float: right;
     padding-right: 95px;
-    margin-top: 8px;	
+    margin-top: 8px;
+    margin-right: 40px;	
 }
 p.btnCentrado {
     text-align: center;
@@ -320,6 +321,10 @@ div#messageMobile-panel {
 span#hamburger-menu {
     color: #b81800;
 }
+#hamburger-menu {
+    font-size: 30px;
+    cursor: pointer;	
+}
 
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
@@ -339,6 +344,23 @@ span#hamburger-menu {
 /* Mobile */
 @media only screen and (max-width: 768px) {
     /* For mobile phones: */
+    #barra-logout {
+    /* Hasta que lo ajuste*/
+    	display: none;
+    }
+    .navbar-inverse .navbar-brand {
+    	font-size: 16pt;
+    	padding: 5px;    
+    }
+	a#btnClose {
+	    font-size: 14pt;
+	    width: auto;
+	}
+	#hamburger-menu {
+    	font-size: 23px;
+    	cursor: pointer;	
+	}	
+
   .titulo-web {
     font-size: 45pt; 
   }
@@ -369,5 +391,8 @@ span#hamburger-menu {
   .side-collapse.in {
       width:0;
   }  
+}
+@media (min-width: 768px) {
+
 }
 /* FIN - Mobile */
