@@ -18,6 +18,7 @@
             // get current user
             UserService.GetCurrent().then(function (user) {
                 vm.user = user;
+                $("#lbUserName").text(vm.user.username);
                 //console.log (vm.user);                
             });
         }
