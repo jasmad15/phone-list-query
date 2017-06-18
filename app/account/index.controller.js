@@ -27,10 +27,17 @@
             
             UserService.GetCurrent().then(function (user) {
                 vm.currentUser = user;
+                //$("#loginUser").text(vm.currentUser.username);
             	//Con poner aqui el nombre de la agencia el funcionamiento sera igual
                 vm.agencia = vm.currentUser.username;
-                objFilter = JSON.parse('{\"' + vm.filterField + '\":\"' + vm.agencia + '\"}');
-                findListUsers();
+                if (vm.currentUser.profile != 1)
+                {
+                	$("#superiorUser").remove();
+                	$("#agencia").remove();
+                	objFilter = JSON.parse('{\"' + vm.filterField + '\":\"' + vm.agencia + '\"}');
+                	findListUsers();
+                	
+                }
             });
             
         }
@@ -71,8 +78,15 @@
                 });
         }
         
-        function findListUsers(){        	
-            UserService.GetByFilter(objFilter)
+        function findListUsers(){        
+        	// Si es supervisor añadimos el filtro de la agencia
+        	if (vm.currentUser.profile == 2)
+        	{
+        		vm.user.agencia = vm.currentUser.agencia;
+        		//no se si tenemos que añadir tambíen el usuario creador,
+        		// es decir, si un supervisor puede ver solo los usuarios creados por é y su agencia
+        	}
+            UserService.GetByFilter(vm.user)
             .then(function (user) {
             	if (user.length > 0) {
             		//Proceso de carga de la lista
