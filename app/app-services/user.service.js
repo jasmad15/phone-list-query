@@ -16,6 +16,7 @@
         service.Update = Update;
         service.Delete = Delete;
         service.GetByFilter = GetByFilter;
+        service.getListAgencies = getListAgencies; 
 
         return service;
 
@@ -51,6 +52,10 @@
             return $http.post('/api/users/find', user).then(handleSuccess, handleError);
         }
 
+        function getListAgencies() {
+            return $http.post('/api/users/listAgencies').then(handleSuccess, handleError);
+        }
+        
         // private functions
 
         function handleSuccess(res) {

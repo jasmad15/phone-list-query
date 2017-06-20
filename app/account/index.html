@@ -39,78 +39,97 @@
 	</form>
 </div>
  -->
- <div class="container side-collapse-container"> 
-   	<div class="row">
-        <div class="card card-2 card-search col-xs-12 col-md-10 col-md-offset-1">
-	     	<div class="row">
-	     		<div class="col-xs-10 col-md-11" id="inputMobile-panel">
-	     			<div class="row">	        
-        				<h4>Gesti&oacute;n de usuarios</h4>
-        			</div>
-					<form method="post">        			
-        				<div class="row">
+<div class="container side-collapse-container">
+	<div class="row">
+		<div
+			class="card card-2 card-search col-xs-12 col-md-10 col-md-offset-1">
+			<div class="row">
+				<div class="col-xs-10 col-md-11" id="inputMobile-panel">
+					<div class="row">
+						<h4>Gesti&oacute;n de usuarios</h4>
+					</div>
+					<form method="post">
+						<div class="row">
 							<div class="col-md-6">
-								<input type="text" placeholder="nombre@dominio.xxx" class="form-control form-field" ng-model="vm.user.username"/>
+								<input type="text" placeholder="nombre@dominio.xxx"
+									class="form-control form-field" ng-model="vm.user.username" />
 							</div>
 							<div class="col-xs-2 col-md-1">
 								<div class="form-group">
-						             <button class="btn btn-primary" ng-click="vm.findUser()" id="btnSearch"></button>
+									<button class="btn btn-primary" ng-click="vm.findUser()"
+										id="btnSearch"></button>
 								</div>
 							</div>
 							<div class="col-xs-6 col-md-1">
 								<div class="form-group">
-						             <button class="btn btn-primary" ng-click="vm.createUser()" id="btnPlus"></button>
+									<button class="btn btn-primary" ng-click="vm.prepareInsert()"
+										id="btnPlus"></button>
+								</div>
+							</div>
+							<div class="col-xs-6 col-md-1">
+								<div class="form-group">
+									<button class="btn btn-primary" ng-click="vm.updateUser()" style="display: none;"
+										id="btnOk"></button>
+								</div>
+							</div>
+							<div class="col-xs-6 col-md-1">
+								<div class="form-group">
+									<button class="btn btn-primary" ng-click="vm.clearForm()" style="display: none;"
+										id="btnCancel"></button>
 								</div>
 							</div>
 						</div>
 						<hr>
 						<div class="row">
 							<div class="col-md-6">
-								<input type="text" id="firstName" placeholder="Nombre" class="form-control form-field" ng-model="vm.user.firstName" />
+								<input type="text" id="firstName" placeholder="Nombre"
+									class="form-control form-field" ng-model="vm.user.firstName" />
 							</div>
 							<div class="col-md-6">
-								<input type="text" id="superiorUser" placeholder="Supervisor" class="form-control form-field" ng-model="vm.user.superiorUser" />
+								<input type="text" id="lastName" placeholder="Apellidos"
+									class="form-control form-field" ng-model="vm.user.lastName" />
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-md-6">		
-								<input type="password" id="password" placeholder="Password" class="form-control form-field" ng-model="vm.user.password" />
+							<div class="col-md-6">
+								<input type="password" id="password" placeholder="Password"
+									class="form-control form-field" ng-model="vm.user.password" />
 							</div>
 							<div class="col-md-6">
-								<input type="text" id="agencia" placeholder="Agencia" class="form-control form-field" ng-model="vm.user.agencia" />
-							</div>							
+
+							
+							 <select id="agencia" class="form-control form-field"  ng-options="agencia as agencia for agencia in vm.agencias" ng-model="vm.user.agencia"></select>
+							<!-- 
+															<input type="text" id="agencia" placeholder="Agencia" class="form-control form-field" ng-model="vm.user.agencia" />
+								 -->
+							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-12">
 								<div class="row user-row red">
-									<div class="col-md-5">
-										Nombre
-									</div>
-									<div class="col-md-5">
-										Usuario
-									</div>
-									<div class="col-md-2">
-										Baja
-									</div>																		
+									<div class="col-md-5">Nombre</div>
+									<div class="col-md-5">Usuario</div>
+									<div class="col-md-2">Baja</div>
 								</div>
-								<div class="row user-row grey" ng-repeat="x in vm.userList" ng-class="{even: $even, odd: $odd}">
+								<div class="row user-row grey" ng-repeat="x in vm.userList"
+									ng-class="{even: $even, odd: $odd}">
+									<div class="col-md-5">{{x.firstName}}</div>
 									<div class="col-md-5">
-										{{x.firstName}}
-									</div>
-									<div class="col-md-5">
-										{{x.username}}
+										<a ng-href="#" ng-click="vm.prepareUpdate()">{{x.username}}</a>
 									</div>
 									<div class="col-md-2">
+
 										<span class="btnDelete" ng-click="vm.deleteUser(x._id)"></span>
-									</div>																		
-								</div>																					
+									</div>
+
+								</div>
 								<!-- <h1 ng-repeat="x in vm.userList">
 									{{x.firstName}} - {{x.username}} - <span class="btnDelete" ng-click="vm.deleteUser(x._id)"></span>
 								</h1> -->
 							</div>
-						</div>				
+						</div>
 					</form>
-				</div>					
+				</div>
 			</div>
 		</div>
 	</div>

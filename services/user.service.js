@@ -15,6 +15,7 @@ service.create = create;
 service.update = update;
 service.delete = _delete;
 service.getByFilter = getByFilter;
+service.getListAgencies = getListAgencies;
 
 module.exports = service;
 
@@ -70,6 +71,26 @@ function getByFilter(_user) {
 		}
 	});
 
+	return deferred.promise;
+}
+
+function getListAgencies()
+{
+	var deferred = Q.defer();
+
+	db.users.distinct("agencia", function(err, agencies){
+		if (err){
+			deferred.reject(err.name + ': ' + err.message);
+		}
+
+		if (agencies) {
+
+			deferred.resolve(agencies);
+		} else {
+			deferred.resolve();
+		}
+	});
+	
 	return deferred.promise;
 }
 

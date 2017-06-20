@@ -13,6 +13,7 @@ router.post('/find', findUsers);
 router.put('/:_id', updateUser);
 router.delete('/:_id', deleteUser);
 router.post('/findNumber', findNumber);
+router.post('/listAgencies', getListAgencies);
 
 module.exports = router;
 
@@ -50,6 +51,16 @@ function findUsers(req, res) {
 	.then(function (users) {
 		writeUserLog(req,res,'BUSQUEDA_USUARIO', null);
 		res.status(200).send(users);
+	})
+	.catch(function (err) {
+		res.status(400).send(err);
+	});
+}
+
+function getListAgencies(req, res) {
+	userService.getListAgencies(req.body)
+	.then(function (agencies) {
+		res.status(200).send(agencies);
 	})
 	.catch(function (err) {
 		res.status(400).send(err);

@@ -1,6 +1,7 @@
 ﻿(function () {
     'use strict';
-
+  	$("#btnOk").hide();
+	$("#btnCancel").hide();
     angular
         .module('app')
         .controller('Account.IndexController', Controller);
@@ -9,6 +10,7 @@
         var vm = this;
         
         vm.filterField = "superiorUser";
+        vm.agencias = null;
         vm.agencia = null;
         var objFilter = null;
         vm.user = null;
@@ -19,14 +21,20 @@
         vm.findUser = findUser;
         vm.findListUsers = findListUsers;
         vm.userList = null;
-
-
+        vm.updateUser = updateUser;
+        vm.clearFlash = clearFlash;
+        vm.getListAgencies = getListAgencies;
+        vm.prepareInsert = prepareInsert;
+        vm.action = null;
+        vm.clearForm = clearForm;
+        vm.prepareUpdate = prepareUpdate;
         initController();
 
         function initController() {
             
             UserService.GetCurrent().then(function (user) {
                 vm.currentUser = user;
+                $("#lbUserName").text(vm.currentUser.username);
                 //$("#loginUser").text(vm.currentUser.username);
             	//Con poner aqui el nombre de la agencia el funcionamiento sera igual
                 vm.agencia = vm.currentUser.username;
@@ -38,10 +46,24 @@
                 	findListUsers();
                 	
                 }
+               
             });
-            
+            //Cargamos las agencias
+            getListAgencies();
         }
 
+        function prepareInsert()
+        {
+        	//Primero limpiamos le formulario
+        	emtyFields();
+        	//ocultamos los botones de buscar y nuevo
+        	$("#btnSearch").hide();
+        	$("#btnPlus").hide();
+        	//Mostramos los otros botones
+        	$("#btnOk").show();
+        	$("#btnCancel").show();
+        	vm.action = 0;
+        }
         function saveUser() {        	
             UserService.Update(vm.user)
                 .then(function () {
@@ -51,6 +73,38 @@
                 .catch(function (error) {
                     FlashService.Error(error);
                 });
+        }
+        
+        function updateUser()
+        {
+        	if (vm.action = 0)
+        	{
+        		createUser();
+        	}else
+        	{
+        		saveUser();
+        	}
+        }
+        
+        
+        function getListAgencies()
+        {
+        	  UserService.getListAgencies()
+              .then(function (agencias) {
+              	if (agencias.length > 0) {
+              		//Proceso de carga de la lista
+              		vm.agencias = agencias;
+              	} else {
+              		FlashService.Error('No hay agencias definidas');
+              	}
+              })
+              .catch(function (error) {
+                  FlashService.Error(error);
+              });        	
+        }
+        function clearFlash()
+        {
+        	FlashService.clearFlash();
         }
         
         function createUser() {
@@ -82,7 +136,12 @@
         	// Si es supervisor añadimos el filtro de la agencia
         	if (vm.currentUser.profile == 2)
         	{
+        		if (vm.user == null)
+        		{
+        			vm.user = new Object();
+        		}
         		vm.user.agencia = vm.currentUser.agencia;
+        		vm.user.profile = 3;
         		//no se si tenemos que añadir tambíen el usuario creador,
         		// es decir, si un supervisor puede ver solo los usuarios creados por é y su agencia
         	}
@@ -119,13 +178,34 @@
         }
         
         function emtyFields(){
-    		vm.user.firstName = '';
-    		vm.user.lastName = '';
-    		vm.user.superiorUser = '';
-    		vm.user.password = '';
-    		vm.user.agencia = '';
+        	if (vm.user != null)
+        	{
+	    		delete vm.user.firstName;
+	    		delete  vm.user.lastName;
+	    		delete vm.user.superiorUser;
+	    		delete vm.user.password;
+	    		delete vm.user.agencia;
+        	}
         }
         
+        function clearForm()
+        {
+        	//Primero limpiamos le formulario
+        	emtyFields();
+        	//Mostramos los botones de buscar y nuevo
+        	$("#btnSearch").show();
+        	$("#btnPlus").show();
+        	//Ocultamos los otros botones
+        	$("#btnOk").hide();
+        	$("#btnCancel").hide();
+        	delete vm.action;
+        	
+        }
+        
+        function prepareUpdate()
+        {
+        	
+        }
     }
 
 })();
