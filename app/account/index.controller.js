@@ -62,7 +62,7 @@
         	//Mostramos los otros botones
         	$("#btnOk").show();
         	$("#btnCancel").show();
-        	vm.action = 0;
+        	vm.action = 1;
         }
         function saveUser() {        	
             UserService.Update(vm.user)
@@ -108,7 +108,8 @@
         }
         
         function createUser() {
-        	vm.user.superiorUser = vm.currentUser.username;
+        	//Mientras ponemos el combo para que puedan determinar si es supervisor o usuario estandar
+        	vm.user.profile = 3;
             UserService.Create(vm.user)
                 .then(function () {
                     FlashService.Success('Usuario creado correctamente');
@@ -145,19 +146,22 @@
         		//no se si tenemos que añadir tambíen el usuario creador,
         		// es decir, si un supervisor puede ver solo los usuarios creados por é y su agencia
         	}
-            UserService.GetByFilter(vm.user)
-            .then(function (user) {
-            	if (user.length > 0) {
-            		//Proceso de carga de la lista
-            		vm.userList = user;
-            	} else {
-            		FlashService.Error('Agencia sin usuarios');
-            	}
-            })
-            .catch(function (error) {
-                FlashService.Error(error);
-            });        	
-        	
+        	//Solo listar 
+        	if (vm.currentUser.profile == 2)
+        	{        	
+	            UserService.GetByFilter(vm.user)
+	            .then(function (user) {
+	            	if (user.length > 0) {
+	            		//Proceso de carga de la lista
+	            		vm.userList = user;
+	            	} else {
+	            		FlashService.Error('Agencia sin usuarios');
+	            	}
+	            })
+	            .catch(function (error) {
+	                FlashService.Error(error);
+	            });        	
+        	}
         }
         
         function findUser() {
@@ -202,8 +206,23 @@
         	
         }
         
-        function prepareUpdate()
+        function prepareUpdate(userName)
         {
+        	//alert(userName);
+        	vm.user.username = userName;
+            UserService.GetByFilter(vm.user)
+            .then(function (user) {
+            	$('#userName').val(user[0].username);
+            	$('#firstName').val(user[0].firstName);
+            	$('#lastName').val(user[0].lastName);
+        		//vm.user.superiorUser = user[0].superiorUser;
+            	vm.prepareInsert();
+        		vm.userList = user;
+        		emtyFields();
+            })
+            .catch(function (error) {
+                FlashService.Error(error);
+            });        	
         	
         }
     }

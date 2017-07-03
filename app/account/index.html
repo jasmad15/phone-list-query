@@ -51,7 +51,7 @@
 					<form method="post">
 						<div class="row">
 							<div class="col-md-6">
-								<input type="text" placeholder="nombre@dominio.xxx"
+								<input type="text" id="userName" placeholder="nombre@dominio.xxx"
 									class="form-control form-field" ng-model="vm.user.username" />
 							</div>
 							<div class="col-xs-2 col-md-1">
@@ -62,8 +62,10 @@
 							</div>
 							<div class="col-xs-6 col-md-1">
 								<div class="form-group">
-									<button class="btn btn-primary" ng-click="vm.prepareInsert()"
-										id="btnPlus"></button>
+									<!-- <button class="btn btn-primary" ng-click="vm.prepareInsert()"
+										id="btnPlus"></button>  -->
+									<button class="btn btn-primary" ng-click="vm.createUser()"
+										id="btnPlus"></button>										
 								</div>
 							</div>
 							<div class="col-xs-6 col-md-1">
@@ -107,15 +109,15 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="row user-row red">
-									<div class="col-md-5">Nombre</div>
-									<div class="col-md-5">Usuario</div>
-									<div class="col-md-2">Baja</div>
+									<div class="col-xs-5 col-md-5">Nombre</div>
+									<div class="col-xs-4 col-md-5">Usuario</div>
+									<div class="col-xs-2 col-md-2">Baja</div>
 								</div>
 								<div class="row user-row grey" ng-repeat="x in vm.userList"
 									ng-class="{even: $even, odd: $odd}">
-									<div class="col-md-5">{{x.firstName}}</div>
+									<div class="col-md-5 name">{{x.firstName}}</div>
 									<div class="col-md-5">
-										<a ng-href="#" ng-click="vm.prepareUpdate()">{{x.username}}</a>
+										<a ng-href="#" ng-click="vm.prepareUpdate(x.username)">{{x.username}}</a>
 									</div>
 									<div class="col-md-2">
 

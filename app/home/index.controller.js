@@ -49,16 +49,18 @@
         /* Funciones estandar */
     	function initPanels() {
     		//Inicializamos los paneles. Lo normal es que sea al entrar en el propio campo y como minimo al pulsar sobre el boton de busqueda
-    		/*
+    		
     		$('#response-empty').css('display','none');
     		$('#response-a').css('display','none');
     		$('#response-g').css('display','none');
     		$('#messageMobile-panel').css('display','none');
-    		*/
+    		
+    		/*
     		$('#response-empty').hide(1000);
     		$('#response-a').hide(1000);
     		$('#response-g').hide(1000);
     		$('#messageMobile-panel').css('display','none');
+    		*/
     		//El spinner tambien por si se hubiese quedado por ahi
     		showSpinner('none');
     	}
@@ -68,14 +70,17 @@
     		if (resultado === "A") {
     			$('#response-empty').css('display','block');
     			$('#response-empty-phoneSearch').html(phoneNumber);
+    			$('#messageMobile-panel').css('display','block');
     		} else if (resultado === "B") {
     			$('#response-a').css('display','block');
     			$('#response-a-phoneSearch').html(phoneNumber);
+    			$('#messageMobile-panel').css('display','block');
     		} else if (resultado === null || resultado === undefined) {
     			$('#response-g').css('display','block');
     			$('#response-g-phoneSearch').html(phoneNumber);
+    			$('#messageMobile-panel').css('display','block');
     		}
-    		$('#messageMobile-panel').css('display','block');	
+    		//$('#messageMobile-panel').css('display','block');	
     	}
     	$(document).ready(function(){
     		//Inicializamos los paneles cuando vuelve a entrar en el campo. Damos por hecho que quiere una nueva consulta

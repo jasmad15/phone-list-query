@@ -68,15 +68,15 @@ h4 {
 .form-field {
   font-family: Lato;
   font-weight: 300;
-  font-size: 30pt;
+  font-size: 16pt;
   color: #999999;
-  height: 60px;
-  width: 400px;
+  height: 45px;
+  /*width: 400px;*/
   margin-top: 10px;
 }
 .user-login {
   font-weight: 300;
-  font-size: 30pt;	
+  font-size: 16pt;	
 }
 #inputEmail, 
 #username, .user-login {
@@ -85,7 +85,7 @@ h4 {
   margin-bottom: 15px;
   font-family: Lato;
   font-weight: 300;
-  font-size: 30pt;
+  font-size: 16pt;
   color: #999999;
 }
 #inputPassword, #password {
@@ -94,14 +94,14 @@ h4 {
   margin-bottom: 15px;
   font-family: Lato;
   font-weight: 300;
-  font-size: 30pt;
+  font-size: 16pt;
   color: #999999;
 }
 #phoneValidate {
   font-family: Lato;
   font-weight: 300;
-  font-size: 36pt;
-  height: 60px;
+  font-size: 25pt;
+  height: 45px;
   width: 290px;
 }
 #phoneValidate:focus {
@@ -167,15 +167,15 @@ a#btnClose {
     width: auto;
 }
 .btnDelete {
-    background: transparent url(../img/btnBaja.png) right 1px no-repeat;
+    background: transparent url(../img/btnBaja.png) center 0px no-repeat;
     cursor:pointer;
     top: 10px;
     border-color: transparent;
     border: none;
-    height: 32px;
+    height: 34px;
     float: right;
     padding-right: 95px;
-    margin-top: 8px;
+    margin-top: 0px;
     margin-right: 40px;	
 }
 p.btnCentrado {
@@ -185,7 +185,7 @@ p.btnCentrado {
 .titulo-web {
   font-family: Lato;
   font-weight: 100;
-  font-size: 72pt;
+  font-size: 50pt;
   color: #b81800;
   text-align: center;
 }
@@ -213,15 +213,20 @@ hr.hr-titulo-web {
 .user-row {
 	box-shadow: 0 1px 1px rgba(0,0,0,0.16), 0 1px 1px rgba(0,0,0,0.23);
 	margin: 10px;
-    height: 50px;
+    height: 36px;
 }
 .user-row.red {
     background-color: #b81800;
     color: #ffffff;
     font-family: Lato;
     font-weight: 300;
-    font-size: 32pt;
-    height: 65px;
+    font-size: 16pt;
+    height: 34px;
+}
+.user-row .name {
+	white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .even{
     background-color: #ebebeb;
@@ -233,7 +238,7 @@ hr.hr-titulo-web {
 	color: #333333;
     font-family: Lato;
     font-weight: 300;
-    font-size: 22pt;	
+    font-size: 16pt;	
 }
 /* Paneles de busqueda */
 div#inputMobile-panel {
@@ -248,7 +253,7 @@ div#responseMobile-panel {
     margin: 0 10px;
     font-family: Lato;
     font-weight: 100;
-    font-size: 24pt;
+    font-size: 18pt;
     /*font-size: 28pt;*/ //Este es el tamaño que ellos quieren pero quizas sea un poco grande
 }
 div#response-empty {
@@ -274,7 +279,7 @@ div#messageMobile-panel {
     color: #333333;
     font-family: Lato;
     font-weight: 100;
-    font-size: 24pt;
+    font-size: 18pt;
     /*font-size: 28pt;*/ //Este es el tamaño que ellos quieren pero quizas sea un poco grande
 }
 #spinner {
@@ -376,36 +381,57 @@ span#hamburger-menu {
     	cursor: pointer;	
 	}	
 
-  .titulo-web {
-    font-size: 45pt; 
-  }
-  hr.hr-titulo-web {
-    width: 45%;
-  }
-  input[type=text] {
-    font-size: 20pt;
-  }
-  .side-collapse-container{
-      width:100%;
-      position:relative;
-      left:0;
-      transition:left .4s;
-  }
-  .side-collapse-container.out{
-      left:200px;
-  }
-  .side-collapse {
-      top:50px;
-      bottom:0;
-      left:0;
-      width:200px;
-      position:fixed;
-      overflow:hidden;
-      transition:width .4s;
-  }
-  .side-collapse.in {
-      width:0;
-  }  
+  	.titulo-web {
+    	font-size: 30pt; 
+  	}
+  	hr.hr-titulo-web {
+    	width: 45%;
+  	}
+  	input[type=text] {
+    	font-size: 20pt;
+  	}
+  	.side-collapse-container{
+    	width:100%;
+      	position:relative;
+      	left:0;
+      	transition:left .4s;
+  	}
+  	.side-collapse-container.out{
+    	left:200px;
+  	}
+  	.side-collapse {
+    	top:50px;
+      	bottom:0;
+      	left:0;
+      	width:200px;
+      	position:fixed;
+      	overflow:hidden;
+      	transition:width .4s;
+  	}
+  	.side-collapse.in {
+    	width:0;
+  	}
+	div#inputMobile-panel {
+	    width: 82%;
+	}  	
+	.response-panel {
+    	font-size: 12pt;
+    	width: 94%;
+    	/*font-size: 28pt;*/ //Este es el tamaño que ellos quieren pero quizas sea un poco grande
+	}
+	#phoneValidate {
+    	width: auto;
+    	font-size: 18pt;
+	}
+	div#messageMobile-panel {
+		font-size: 12pt;
+		margin-top: 15px;
+		padding-left: 34px;
+	}
+	.user-row.red {
+	    font-size: 10pt;
+	    height: 23px;
+	}	
 }
 @media (min-width: 768px) {
 
