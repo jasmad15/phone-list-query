@@ -25,6 +25,12 @@ app.use('/api/users', require('./controllers/api/users.controller'));
 //ficheros estaticos ESTO
 app.use(express.static('public'));
 
+app.use(function (err, req, res, next) {
+	  if (err.name === 'UnauthorizedError') {
+	    res.status(401).send('Sesión no valida, por favor vuelva a iniciar sesión');
+	  }
+	});
+
 app.get('/', function (req, res) {
     return res.redirect('/app');
 });

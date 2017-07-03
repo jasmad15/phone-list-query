@@ -29,14 +29,22 @@ function insert(log) {
 
 function find(log)
 {
-	 var deferred = Q.defer();
-	 db.logs.find(
-			 log, 
-			 function(err,doc)
-			 {
-				 if (err) deferred.reject(err.name + ': ' + err.message);
-			 });
-	 return deferred.promise;
+	var deferred = Q.defer();
+
+	db.logs.find(log).toArray(function(err, logs){
+		if (err){
+			deferred.reject(err.name + ': ' + err.message);
+		}
+
+		if (logs) {
+
+			deferred.resolve(logs);
+		} else {
+			deferred.resolve();
+		}
+	});
+
+	return deferred.promise;
 }
 
 

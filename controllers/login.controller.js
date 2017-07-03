@@ -6,12 +6,13 @@ var userService = require('services/user.service');
 
 router.get('/', function (req, res) {
     delete req.session.token;
-
+    
     var viewData = { success: req.session.success };
     delete req.session.success;
-
+    
     res.render('login', viewData);
-});
+    
+ });
 
 router.post('/', function (req, res) {
     request.post({
