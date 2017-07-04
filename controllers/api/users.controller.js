@@ -14,19 +14,20 @@ router.put('/:_id', updateUser);
 router.delete('/:_id', deleteUser);
 router.post('/findNumber', findNumber);
 router.post('/listAgencies', getListAgencies);
+router.post('/logging', getlogging);
 
 module.exports = router;
 
 function authenticateUser(req, res) {
 	userService.authenticate(req.body.username, req.body.password)
-	
+
 	.then(function (token) {
 		if (token) {
-			writeUserLog(req,res,'INICIO_SESION_EXITO','el usuario ' + req.body.username + ' se ha logado correctamente', req.body.username);
+			writeUserLog(null,res,'INICIO_SESION_EXITO','el usuario ' + req.body.username + ' se ha logado correctamente', req.body.username);
 			res.send({ token: token });
-			
+
 		} else {
-			writeUserLog(req,res,'INICIO_SESION_ERROR', 'el usuario ' + req.body.username + ' ha tenido un login incorrecto',req.body.username);
+			writeUserLog(null,res,'INICIO_SESION_ERROR', 'el usuario ' + req.body.username + ' ha tenido un login incorrecto',req.body.username);
 			res.status(401).send('El usuario o contraseña no es correcta');
 		}
 	})
@@ -38,11 +39,11 @@ function authenticateUser(req, res) {
 function registerUser(req, res) {
 	userService.create(req.body)
 	.then(function () {
-		writeUserLog(req,res,'ALTA_USUARIO_EXITO', 'Se ha dado de alta al usuario ' + req.body.username + ' de alta correctamente',m , req.body.username);
+		writeUserLog(null,res,'ALTA_USUARIO_EXITO', 'Se ha dado de alta al usuario ' + req.body.username + ' de alta correctamente', req.body.username);
 		res.sendStatus(200);
 	})
 	.catch(function (err) {
-		writeUserLog(req,res,'ALTA_USUARIO_ERROR', 'No se ha podido dar de alta al usuario ' + req.body.username + ' con error: ' + err,m , req.body.username);
+		writeUserLog(null,res,'ALTA_USUARIO_ERROR', 'No se ha podido dar de alta al usuario ' + req.body.username + ' con error: ' + err, req.body.username);
 		res.status(400).send(err);
 	});
 }
@@ -50,7 +51,7 @@ function registerUser(req, res) {
 function findUsers(req, res) {
 	userService.getByFilter(req.body)
 	.then(function (users) {
-		writeUserLog(req,res,'BUSQUEDA_USUARIO', null);
+		writeUserLog(users._id,res,'BUSQUEDA_USUARIO', null);
 		res.status(200).send(users);
 	})
 	.catch(function (err) {
@@ -71,10 +72,18 @@ function getListAgencies(req, res) {
 function findNumber(req, res) {
 	phoneList.findOne(req.body.NVOMSISDN)
 	.then(function (result) {
-		writeUserLog(req,res,'BUSQUEDA_NUMERO_EXITO' , 'Se ha consultado el numero: ' + req.body.NVOMSISDN + ' con resultado: ' + result.TIPO , null);
+		if (result)
+		{
+			writeUserLog(req,res,'BUSQUEDA_NUMERO_EXITO' , 'Se ha consultado el numero: ' + req.body.NVOMSISDN + ' con resultado: ' + result.TIPO , null);
+		}else
+		{
+			writeUserLog(req,res,'BUSQUEDA_NUMERO_EXITO' , 'Se ha consultado el numero: ' + req.body.NVOMSISDN + ' con resultado: Número no encontrado' , null);
+		}
+
 		res.status(200).send(result);
 	})
 	.catch(function (err) {
+		writeUserLog(req,res,'BUSQUEDA_NUMERO_ERROR' , 'La consulta del número: ' + req.body.NVOMSISDN + ' ha terminado con error: ' + err , null);
 		res.status(400).send(err);
 	});
 }
@@ -94,17 +103,17 @@ function getCurrentUser(req, res) {
 }
 
 
-function writeUserLog(req, res, action, desc, username)
+function writeUserLog(userId, res, action, desc, username)
 {
 	if (username == null)
 	{
-		userService.getById(req.user.sub).then(function (user) {
+		userService.getById(userId).then(function (user) {
 			if (user) {
-				
+
 				var log = new Object();
 				log.date = new Date();
 				log.action = action
-				log.action = desc;
+				log.desc = desc;
 				log.username = user.username;
 				logger.insert(log);
 			} 			
@@ -124,39 +133,50 @@ function writeUserLog(req, res, action, desc, username)
 }
 
 function updateUser(req, res) {
-
-	userService.getById(req.user.sub).then(function (user) {
-		if (user) {
-			userService.update(userId, req.body)
-			.then(function () {
-				writeUserLog(req,res,'ACTUALIZA_USUARIO_EXITO', 'Usuario '+ user.username + ' se ha actualizado con exito', null);
-				res.sendStatus(200);
-			})
-			.catch(function (err) {
-				writeUserLog(req,res,'ACTUALIZA_USUARIO_ERROR', 'Eroor al actulaizar el usuario '+ user.username + ' con error: ' + err.message, null);
-				res.status(400).send(err);
-			});
-		} else {
-			res.sendStatus(404);
-		}
+	userService.update(req.body)
+	.then(function () {
+		writeUserLog(req.user.sub,res,'ACTUALIZA_USUARIO_EXITO', 'Usuario '+ req.body.username + ' se ha actualizado con exito', null);
+		res.sendStatus(200);
 	})
 	.catch(function (err) {
+		writeUserLog(req.user.sub,res,'ACTUALIZA_USUARIO_ERROR', 'Eroor al actulaizar el usuario '+ req.body.username + ' con error: ' + err, null);
 		res.status(400).send(err);
 	});
-	
-	
+
+
+
 }
 
 function deleteUser(req, res) {
 	var userId = req.params._id;
-	
+
 	userService.delete(userId)
 	.then(function () {
-		writeUserLog(req,res,'BORRADO_USUARIO_EXITO', 'Borrado del usuario:  ' + userId + ' Con exito',null);
+		writeUserLog(userId,res,'BORRADO_USUARIO_EXITO', 'Borrado del usuario:  ' + userId + ' Con exito',null);
 		res.sendStatus(200);
 	})
 	.catch(function (err) {
-		writeUserLog(req,res,'BORRADO_USUARIO_ERROR', 'Borrado del usuario:  ' + userId + ' Con error',null);
+		writeUserLog(userId,res,'BORRADO_USUARIO_ERROR', 'Borrado del usuario:  ' + userId + ' Con error: ' + err,null);
+		res.status(400).send(err);
+	});
+}
+
+function getlogging(req, res) {
+	logger.find(req.body) 
+	.then(function (result) {
+		/*
+		if (result)
+		{
+			writeUserLog(req,res,'BUSQUEDA_NUMERO_EXITO' , 'Se ha consultado el numero: ' + req.body.NVOMSISDN + ' con resultado: ' + result.TIPO , null);
+		}else
+			{
+			writeUserLog(req,res,'BUSQUEDA_NUMERO_EXITO' , 'Se ha consultado el numero: ' + req.body.NVOMSISDN + ' con resultado: Número no encontrado' , null);
+			}
+		 */
+		res.status(200).send(result);
+	})
+	.catch(function (err) {
+		//writeUserLog(req,res,'BUSQUEDA_NUMERO_ERROR' , 'La consulta del número: ' + req.body.NVOMSISDN + ' ha terminado con error: ' + err , null);
 		res.status(400).send(err);
 	});
 }

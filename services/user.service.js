@@ -128,31 +128,9 @@ function create(userParam) {
 	return deferred.promise;
 }
 
-function update(_id, userParam) {
+function update(userParam) {
 	var deferred = Q.defer();
 
-	// validation
-	db.users.findById(_id, function (err, user) {
-		if (err) deferred.reject(err.name + ': ' + err.message);
-
-		if (user.username !== userParam.username) {
-			db.users.findOne(
-					{ username: userParam.username },
-					function (err, user) {
-						if (err) deferred.reject(err.name + ': ' + err.message);
-
-						if (user) {
-							deferred.reject('El usuario "' + req.body.username + '" ya esta dado de alta')
-						} else {
-							updateUser();
-						}
-					});
-		} else {
-			updateUser();
-		}
-	});
-
-	function updateUser() {
 		// fields to update
 		var set = {
 				firstName: userParam.firstName,
@@ -164,7 +142,7 @@ function update(_id, userParam) {
 		if (userParam.password) {
 			set.hash = bcrypt.hashSync(userParam.password, 10);
 		}
-
+		var _id = userParam._id;
 		db.users.update(
 				{ _id: mongo.helper.toObjectID(_id) },
 				{ $set: set },
@@ -173,7 +151,7 @@ function update(_id, userParam) {
 
 					deferred.resolve();
 				});
-	}
+	
 
 	return deferred.promise;
 }

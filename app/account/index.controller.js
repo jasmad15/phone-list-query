@@ -28,6 +28,7 @@
         vm.action = null;
         vm.clearForm = clearForm;
         vm.prepareUpdate = prepareUpdate;
+        vm.lastUserQuery = null;
         initController();
 
         function initController() {
@@ -43,7 +44,7 @@
                 	$("#superiorUser").remove();
                 	$("#agencia").remove();
                 	objFilter = JSON.parse('{\"' + vm.filterField + '\":\"' + vm.agencia + '\"}');
-                	findListUsers();
+                	//findListUsers();
                 	
                 }
                
@@ -55,20 +56,35 @@
         function prepareInsert()
         {
         	//Primero limpiamos le formulario
-        	emtyFields();
+        	emptyFields();
         	//ocultamos los botones de buscar y nuevo
+        	showOkCancelButtons();
+        	vm.action = 0;
+        	
+        	
+        	
+        }
+        
+        
+        function showOkCancelButtons()
+        {
         	$("#btnSearch").hide();
         	$("#btnPlus").hide();
         	//Mostramos los otros botones
         	$("#btnOk").show();
         	$("#btnCancel").show();
-        	vm.action = 1;
         }
+        
         function saveUser() {        	
             UserService.Update(vm.user)
                 .then(function () {
                     FlashService.Success('Usuario Actualizado');
-                    emtyFields();
+                    clearForm();
+                    if (vm.lastUserQuery)
+                    {
+                    	vm.user = vm.lastUserQuery;
+                    	findUser();
+                    }
                 })
                 .catch(function (error) {
                     FlashService.Error(error);
@@ -77,7 +93,7 @@
         
         function updateUser()
         {
-        	if (vm.action = 0)
+        	if (vm.action == 0)
         	{
         		createUser();
         	}else
@@ -114,7 +130,7 @@
                 .then(function () {
                     FlashService.Success('Usuario creado correctamente');
                     findListUsers();
-                    emtyFields();
+                    emptyFields();
                 })
                 .catch(function (error) {
                     FlashService.Error(error);
@@ -165,27 +181,24 @@
         }
         
         function findUser() {
-        	//Esto en teoria no deberia ser necesario
-        	delete vm.user.lastName;
-        	delete vm.user.firstName;
-        	
+        	vm.lastUserQuery = clone(vm.user);
             UserService.GetByFilter(vm.user)
                 .then(function (user) {
-            		//vm.user.firstName = user[0].firstName;
-            		//vm.user.superiorUser = user[0].superiorUser;
             		vm.userList = user;
-            		emtyFields();
                 })
                 .catch(function (error) {
                     FlashService.Error(error);
                 });
         }
         
-        function emtyFields(){
+        function emptyFields(){
         	if (vm.user != null)
         	{
+        		delete vm.user._id;
+        		delete vm.user.hash;
+        		delete vm.user.username;
 	    		delete vm.user.firstName;
-	    		delete  vm.user.lastName;
+	    		delete vm.user.lastName;
 	    		delete vm.user.superiorUser;
 	    		delete vm.user.password;
 	    		delete vm.user.agencia;
@@ -195,7 +208,7 @@
         function clearForm()
         {
         	//Primero limpiamos le formulario
-        	emtyFields();
+       		emptyFields();
         	//Mostramos los botones de buscar y nuevo
         	$("#btnSearch").show();
         	$("#btnPlus").show();
@@ -208,22 +221,27 @@
         
         function prepareUpdate(userName)
         {
-        	//alert(userName);
+        	
+        	showOkCancelButtons();
         	vm.user.username = userName;
             UserService.GetByFilter(vm.user)
             .then(function (user) {
-            	$('#userName').val(user[0].username);
-            	$('#firstName').val(user[0].firstName);
-            	$('#lastName').val(user[0].lastName);
-        		//vm.user.superiorUser = user[0].superiorUser;
-            	vm.prepareInsert();
-        		vm.userList = user;
-        		emtyFields();
+            	vm.action = 1;
+            	vm.user = user[0];
             })
             .catch(function (error) {
                 FlashService.Error(error);
             });        	
         	
+        }
+        
+        function clone(obj) {
+            if (null == obj || "object" != typeof obj) return obj;
+            var copy = obj.constructor();
+            for (var attr in obj) {
+                if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
+            }
+            return copy;
         }
     }
 
