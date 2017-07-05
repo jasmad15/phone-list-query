@@ -44,9 +44,14 @@
                 	$("#superiorUser").remove();
                 	$("#agencia").remove();
                 	objFilter = JSON.parse('{\"' + vm.filterField + '\":\"' + vm.agencia + '\"}');
-                	//findListUsers();
+                	findListUsers();
                 	
                 }
+                //Quitamos la opcion de users
+                if (vm.currentUser.profile != 1 && vm.currentUser.profile != 2)
+                {
+                	$("#userManagement").remove();
+                }                
                
             });
             //Cargamos las agencias
@@ -74,6 +79,7 @@
         	$("#btnOk").show();
         	$("#btnCancel").show();
         }
+  
         
         function saveUser() {        	
             UserService.Update(vm.user)
@@ -93,15 +99,38 @@
         
         function updateUser()
         {
-        	if (vm.action == 0)
-        	{
-        		createUser();
-        	}else
-        	{
-        		saveUser();
+        	if (fieldsControl()) {
+	        	if (vm.action == 0)
+	        	{
+	        		createUser();
+	        	}else
+	        	{
+	        		saveUser();
+	        	}
         	}
         }
         
+        function fieldsControl(){
+        	if (vm.action == 0)
+        	{     
+        		//usuario nuevo
+	        	//if ((vm.user.username != '' && vm.user.username != undefined) && (vm.user.firstName != '' && vm.user.firstName != undefined) && (vm.user.password != '' && vm.user.password != undefined) && (vm.user.agencia != '' && vm.user.agencia != undefined)){
+        		if ((vm.user.username != '' && vm.user.username != undefined) && (vm.user.firstName != '' && vm.user.firstName != undefined) && (vm.user.password != '' && vm.user.password != undefined)){
+	            	return true;	
+	        	} else {
+	        		FlashService.Error('Debe rellenar todos los campos');
+	        		return false;
+	        	}
+        	} else {
+        		//actualizacion, puede no meter la password porque ya tenia anteriormente
+	        	if (vm.user.username != '' && vm.user.firstName != '' && vm.user.agencia != ''){
+	            	return true;	
+	        	} else {
+	        		FlashService.Error('Debe rellenar todos los campos');
+	        		return false;
+	        	}        		
+        	}
+        }
         
         function getListAgencies()
         {
@@ -126,11 +155,17 @@
         function createUser() {
         	//Mientras ponemos el combo para que puedan determinar si es supervisor o usuario estandar
         	vm.user.profile = 3;
+        	//Indicamos la misma agencia que el supervisor si es un supervisor
+        	if (vm.currentUser.profile == 2)
+        	{ 
+        		vm.user.agencia = vm.currentUser.agencia;
+        	}
             UserService.Create(vm.user)
                 .then(function () {
                     FlashService.Success('Usuario creado correctamente');
                     findListUsers();
                     emptyFields();
+                    clearForm();
                 })
                 .catch(function (error) {
                     FlashService.Error(error);

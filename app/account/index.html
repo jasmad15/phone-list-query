@@ -1,44 +1,4 @@
-<!-- <h1>Alta Usuario</h1>
-<div class="form-container">
-	<form method="post">
-		<div class="form-group">
-			<label for="firstName">Nombre</label> <input type="text"
-				id="firstName" class="form-control" ng-model="vm.user.firstName"
-				 />
-		</div>
-		<div class="form-group">
-			<label for="lastName">Apellidos</label> <input type="text"
-				id="lastName" class="form-control" ng-model="vm.user.lastName"
-				/>
-		</div>
-		<div class="form-group">
-			<label for="username">Usuario</label> <input type="text"
-				id="username" class="form-control" ng-model="vm.user.username"
-				/>
-		</div>
-		<div class="form-group">
-			<label for="password">Contraseña</label> <input type="password"
-				id="password" class="form-control" ng-model="vm.user.password" />
-		</div>
-		<div class="form-group">
-			<label for="password">Perfil</label>
-			<div class="form-group">
-				<select name="profile" ng-model="vm.user.profile">
-					<option value="1">Adminitrador</option>
-					<option value="2">Jefe equipo</option>
-					<option value="3">Eunuco</option>
-				</select>
-			</div>
-		</div>
-		<div class="form-group">
-			<button class="btn btn-primary" ng-click="vm.createUser()">Nuevo</button>
-			<button class="btn btn-primary" ng-click="vm.saveUser()">Guardar</button>
-            <button class="btn btn-danger" ng-click="vm.deleteUser()">Delete</button>
-             <button class="btn btn-primary" ng-click="vm.findUser()">Buscar</button>
-		</div>
-	</form>
-</div>
- -->
+
 <div class="container side-collapse-container">
 	<div class="row">
 		<div
@@ -64,10 +24,6 @@
 								<div class="form-group">
 									 <button class="btn btn-primary" ng-click="vm.prepareInsert()"
 										id="btnPlus"></button> 
-									<!-- 	
-									<button class="btn btn-primary" ng-click="vm.createUser()"
-										id="btnPlus"></button>
-										 -->										
 								</div>
 							</div>
 							<div class="col-xs-6 col-md-1">
@@ -100,14 +56,15 @@
 									class="form-control form-field" ng-model="vm.user.password" />
 							</div>
 							<div class="col-md-6">
-
-							
 							 <select id="agencia" class="form-control form-field"  ng-options="agencia as agencia for agencia in vm.agencias" ng-model="vm.user.agencia"></select>
-							<!-- 
-															<input type="text" id="agencia" placeholder="Agencia" class="form-control form-field" ng-model="vm.user.agencia" />
-								 -->
 							</div>
 						</div>
+						<hr>
+						<div class="row">
+							<div class="col-md-6">
+							
+							</div>
+						</div>						
 						<div class="row">
 							<div class="col-md-12">
 								<div class="row user-row red">
@@ -127,9 +84,6 @@
 									</div>
 
 								</div>
-								<!-- <h1 ng-repeat="x in vm.userList">
-									{{x.firstName}} - {{x.username}} - <span class="btnDelete" ng-click="vm.deleteUser(x._id)"></span>
-								</h1> -->
 							</div>
 						</div>
 					</form>

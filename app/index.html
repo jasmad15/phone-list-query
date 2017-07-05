@@ -28,7 +28,8 @@
             if (isElementOpen (document.getElementById("mySidenav"))) {
 				document.getElementById("mySidenav").style.width = "0px";
             } else {
-            	document.getElementById("mySidenav").style.width = "25%";	
+            	document.getElementById("mySidenav").style.width = "25%";
+            	setTimeout(function(){ closeNav(); }, 3000);
             }
         }
 
@@ -91,7 +92,7 @@
         <div id="mySidenav" class="sidenav" style="width: 0;">
           <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
           <a ui-sref="home">Búsquedas</a>
-          <a ui-sref="account">Gestión de Usuarios</a>
+          <a id="userManagement" ui-sref="account">Gestión de Usuarios</a>
           <a href="/login" target="_self">Logout</a>
         </div>        
         <!-- FIN Menu lateral -->          

@@ -41,6 +41,13 @@
                 controller: 'Account.IndexController',
                 controllerAs: 'vm',
                 data: { activeTab: 'account' }
+            })
+            .state('logging', {
+                url: '/logging',
+                templateUrl: 'logging/index.html',
+                controller: 'Loggin.IndexController',
+                controllerAs: 'vm',
+                data: { activeTab: 'logging' }
             });
         
         

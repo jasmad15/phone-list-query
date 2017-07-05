@@ -74,16 +74,16 @@ function findNumber(req, res) {
 	.then(function (result) {
 		if (result)
 		{
-			writeUserLog(req,res,'BUSQUEDA_NUMERO_EXITO' , 'Se ha consultado el numero: ' + req.body.NVOMSISDN + ' con resultado: ' + result.TIPO , null);
+			writeUserLog(req.user.sub,res,'BUSQUEDA_NUMERO_EXITO' , 'Se ha consultado el numero: ' + req.body.NVOMSISDN + ' con resultado: ' + result.TIPO , null);
 		}else
 		{
-			writeUserLog(req,res,'BUSQUEDA_NUMERO_EXITO' , 'Se ha consultado el numero: ' + req.body.NVOMSISDN + ' con resultado: Número no encontrado' , null);
+			writeUserLog(req.user.sub,res,'BUSQUEDA_NUMERO_EXITO' , 'Se ha consultado el numero: ' + req.body.NVOMSISDN + ' con resultado: Número no encontrado' , null);
 		}
 
 		res.status(200).send(result);
 	})
 	.catch(function (err) {
-		writeUserLog(req,res,'BUSQUEDA_NUMERO_ERROR' , 'La consulta del número: ' + req.body.NVOMSISDN + ' ha terminado con error: ' + err , null);
+		writeUserLog(req.user.sub, res,'BUSQUEDA_NUMERO_ERROR' , 'La consulta del número: ' + req.body.NVOMSISDN + ' ha terminado con error: ' + err , null);
 		res.status(400).send(err);
 	});
 }
