@@ -194,8 +194,6 @@
         		}
         		vm.user.agencia = vm.currentUser.agencia;
         		vm.user.profile = 3;
-        		//no se si tenemos que añadir tambíen el usuario creador,
-        		// es decir, si un supervisor puede ver solo los usuarios creados por é y su agencia
         	}
         	//Solo listar 
         	if (vm.currentUser.profile == 2)
@@ -234,11 +232,21 @@
         		delete vm.user.username;
 	    		delete vm.user.firstName;
 	    		delete vm.user.lastName;
-	    		delete vm.user.superiorUser;
+	    		//delete vm.user.superiorUser;
 	    		delete vm.user.password;
 	    		delete vm.user.agencia;
         	}
         }
+        
+        function clearFieldsForm(){
+        	//Estas dos funciones son practicamente iguales. Habria que ver...Solo cambia agencia
+    		delete vm.user._id;
+    		delete vm.user.hash;        	
+    		delete vm.user.username;
+    		delete vm.user.firstName;
+    		delete vm.user.lastName;
+    		delete vm.user.password;        	
+        }        
         
         function clearForm()
         {
@@ -258,6 +266,8 @@
         {
         	
         	showOkCancelButtons();
+        	//inicializamos obj
+        	clearFieldsForm();
         	vm.user.username = userName;
             UserService.GetByFilter(vm.user)
             .then(function (user) {

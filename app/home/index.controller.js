@@ -9,6 +9,7 @@
         var vm = this;
 
         vm.user = null;
+        vm.currentUser = null;
         vm.listin = null;
         vm.findNumber = findNumber;
 
@@ -18,7 +19,13 @@
             // get current user
             UserService.GetCurrent().then(function (user) {
                 vm.user = user;
+                vm.currentUser = user;
                 $("#lbUserName").text(vm.user.username);
+                //Quitamos la opcion de users
+                if (vm.user.profile != "1" && vm.user.profile != "2")
+                {
+                	$("#userManagement").remove();
+                }
                 //console.log (vm.user);                
             });
         }

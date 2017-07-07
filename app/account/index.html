@@ -8,16 +8,17 @@
 					<div class="row">
 						<h4>Gesti&oacute;n de usuarios</h4>
 					</div>
-					<form method="post">
+					<form method="post" name="userForm">
 						<div class="row">
 							<div class="col-md-6">
 								<input type="text" id="userName" placeholder="nombre@dominio.xxx"
-									class="form-control form-field" ng-model="vm.user.username" />
+									class="form-control form-field" ng-model="vm.user.username" ng-required="vm.currentUser.profile != '1'"/>
+								<span ng-show="!userForm.$pristine && userForm.user.username.$error.required">Debes indicar un usurio</span>
 							</div>
 							<div class="col-xs-2 col-md-1">
 								<div class="form-group">
 									<button class="btn btn-primary" ng-click="vm.findUser()"
-										id="btnSearch"></button>
+										id="btnSearch" ng-disabled="!userForm.$valid"></button>
 								</div>
 							</div>
 							<div class="col-xs-6 col-md-1">
@@ -29,7 +30,7 @@
 							<div class="col-xs-6 col-md-1">
 								<div class="form-group">
 									<button class="btn btn-primary" ng-click="vm.updateUser()" style="display: none;"
-										id="btnOk"></button>
+										id="btnOk" ng-disabled="!userForm.$valid"></button>
 								</div>
 							</div>
 							<div class="col-xs-6 col-md-1">
@@ -43,7 +44,8 @@
 						<div class="row">
 							<div class="col-md-6">
 								<input type="text" id="firstName" placeholder="Nombre"
-									class="form-control form-field" ng-model="vm.user.firstName" />
+									class="form-control form-field" ng-model="vm.user.firstName" ng-required="(vm.action == 1 || vm.action == 0) && vm.currentUser.profile != '1'"/>
+								<span ng-show="userForm.user.firstName.$error.required">El nombre es obligatorio</span>
 							</div>
 							<div class="col-md-6">
 								<input type="text" id="lastName" placeholder="Apellidos"
@@ -53,7 +55,8 @@
 						<div class="row">
 							<div class="col-md-6">
 								<input type="password" id="password" placeholder="Password"
-									class="form-control form-field" ng-model="vm.user.password" />
+									class="form-control form-field" ng-model="vm.user.password" ng-required="(vm.action == 0) && vm.currentUser.profile != '1'"/>
+								<span ng-show="userForm.user.password.$error.required">El password es obligatorio</span>
 							</div>
 							<div class="col-md-6">
 							 <select id="agencia" class="form-control form-field"  ng-options="agencia as agencia for agencia in vm.agencias" ng-model="vm.user.agencia"></select>
