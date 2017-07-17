@@ -11,31 +11,33 @@
 					<form method="post" name="userForm">
 						<div class="row">
 							<div class="col-md-6">
+								<!-- <input type="text" id="userName" placeholder="nombre@dominio.xxx"
+									class="form-control form-field" ng-model="vm.user.username" ng-required="vm.currentUser.profile != '1'"/>-->
 								<input type="text" id="userName" placeholder="nombre@dominio.xxx"
-									class="form-control form-field" ng-model="vm.user.username" ng-required="vm.currentUser.profile != '1'"/>
+									class="form-control form-field" ng-model="vm.user.username" ng-required=""/>									
 								<span ng-show="!userForm.$pristine && userForm.user.username.$error.required">Debes indicar un usurio</span>
 							</div>
 							<div class="col-xs-2 col-md-1">
 								<div class="form-group">
-									<button class="btn btn-primary" ng-click="vm.findUser()"
+									<button class="btn btn-primary" title="Buscar usuario" ng-click="vm.findUser()"
 										id="btnSearch" ng-disabled="!userForm.$valid"></button>
 								</div>
 							</div>
 							<div class="col-xs-6 col-md-1">
 								<div class="form-group">
-									 <button class="btn btn-primary" ng-click="vm.prepareInsert()"
+									 <button class="btn btn-primary" title="A&ntilde;adir un nuevo usuario" ng-click="vm.prepareInsert()"
 										id="btnPlus"></button> 
 								</div>
 							</div>
 							<div class="col-xs-6 col-md-1">
 								<div class="form-group">
-									<button class="btn btn-primary" ng-click="vm.updateUser()" style="display: none;"
+									<button class="btn btn-primary" title="A&ntilde;adir nuevo/Actualizar usuario" ng-click="vm.updateUser()" style="display: none;"
 										id="btnOk" ng-disabled="!userForm.$valid"></button>
 								</div>
 							</div>
 							<div class="col-xs-6 col-md-1">
 								<div class="form-group">
-									<button class="btn btn-primary" ng-click="vm.clearForm()" style="display: none;"
+									<button class="btn btn-primary" title="Regresar/Anular operaci&oacute;n" ng-click="vm.clearForm()" style="display: none;"
 										id="btnCancel"></button>
 								</div>
 							</div>
@@ -55,7 +57,7 @@
 						<div class="row">
 							<div class="col-md-6">
 								<input type="password" id="password" placeholder="Password"
-									class="form-control form-field" ng-model="vm.user.password" ng-required="(vm.action == 0) && vm.currentUser.profile != '1'"/>
+									class="form-control form-field" ng-model="vm.user.password" ng-disabled="vm.action == null" ng-required="(vm.action == 0) && vm.currentUser.profile != '1'"/>
 								<span ng-show="userForm.user.password.$error.required">El password es obligatorio</span>
 							</div>
 							<div class="col-md-6">

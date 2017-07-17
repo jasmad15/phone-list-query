@@ -100,9 +100,9 @@ h4 {
 #phoneValidate {
   font-family: Lato;
   font-weight: 300;
-  font-size: 25pt;
+  font-size: 16pt;
   height: 45px;
-  width: 290px;
+  width: 140px;
 }
 #phoneValidate:focus {
   color: #333333;
@@ -146,16 +146,33 @@ button#btnCancel {
   top: 10px;
   border-color: transparent;
 }
-
-#btnClose {
-    background: white url(../img/btnCierre.png) right 12px no-repeat;
+.sesionUser {
+	top: 5px;
+}
+.nameUser {
     /*top: 10px;*/
     border-color: transparent;
     /*width: 31px;*/
     border: none;
     height: 44px;
     float: right;
-    padding-right: 95px;
+    /*padding-right: 95px;*/
+    /*margin-top: 8px;*/
+	color: #999999;
+    font-family: Lato;
+    font-weight: 300;
+    font-size: 18pt;
+    text-decoration: none;       
+}
+#btnClose {
+    background: white url(../img/btnCierre.png) right 3px no-repeat;
+    /*top: 10px;*/
+    border-color: transparent;
+    /*width: 31px;*/
+    border: none;
+    height: 44px;
+    float: right;
+    padding-right: 30px;
     /*margin-top: 8px;*/    
 }
 a#btnClose {

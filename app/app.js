@@ -45,7 +45,7 @@
             .state('logging', {
                 url: '/logging',
                 templateUrl: 'logging/index.html',
-                controller: 'Loggin.IndexController',
+                controller: 'Logging.IndexController',
                 controllerAs: 'vm',
                 data: { activeTab: 'logging' }
             });

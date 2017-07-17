@@ -15,6 +15,7 @@ router.delete('/:_id', deleteUser);
 router.post('/findNumber', findNumber);
 router.post('/listAgencies', getListAgencies);
 router.post('/logging', getlogging);
+router.post('/getCSVlog', getCSVlog);
 
 module.exports = router;
 
@@ -164,19 +165,33 @@ function deleteUser(req, res) {
 function getlogging(req, res) {
 	logger.find(req.body) 
 	.then(function (result) {
-		/*
+	
 		if (result)
 		{
-			writeUserLog(req,res,'BUSQUEDA_NUMERO_EXITO' , 'Se ha consultado el numero: ' + req.body.NVOMSISDN + ' con resultado: ' + result.TIPO , null);
+			writeUserLog(req,res,'BUSQUEDA_LOGS_EXITO' , 'Se ha consultado las trazas correctamente ' , null);
 		}else
 			{
-			writeUserLog(req,res,'BUSQUEDA_NUMERO_EXITO' , 'Se ha consultado el numero: ' + req.body.NVOMSISDN + ' con resultado: Número no encontrado' , null);
+			writeUserLog(req,res,'BUSQUEDA_LOGS_ERROR' , 'Se ha consultado las trazas con error', null);
 			}
-		 */
-		res.status(200).send(result);
+			res.status(200).send(result);
 	})
 	.catch(function (err) {
-		//writeUserLog(req,res,'BUSQUEDA_NUMERO_ERROR' , 'La consulta del número: ' + req.body.NVOMSISDN + ' ha terminado con error: ' + err , null);
+		writeUserLog(req,res,'BUSQUEDA_LOGS_ERROR' , 'La consulta de trazas ha terminado con error: ' + err , null);
+		res.status(400).send(err);
+	});
+}
+
+function getCSVlog(req, res) {
+	logger.exportToCsv(req.body) 
+	.then(function (result) {
+	
+		if (result)
+		{
+			res.status(200).send(result);
+		}
+	})
+	.catch(function (err) {
+		writeUserLog(req,res,'BUSQUEDA_LOGS_ERROR' , 'La consulta de trazas ha terminado con error: ' + err , null);
 		res.status(400).send(err);
 	});
 }

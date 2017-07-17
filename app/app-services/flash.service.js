@@ -51,7 +51,7 @@
                 keepAfterLocationChange: keepAfterLocationChange
             };
             
-            //setTimeout(clearFlash, 3000);
+            setTimeout(clearFlash, 3000);
             $(".flash-message").show();
             
         }

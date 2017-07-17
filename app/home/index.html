@@ -25,13 +25,13 @@
    			</div>
     		<div class="row">
     			<form method="post" class="">
-    				<div class="col-xs-9 col-md-10" id="inputMobile-number-panel">
+    				<div class="col-xs-9 col-md-6" id="inputMobile-number-panel">
     					<input type="text" pattern="[6-7]{1}[0-9]{8}" name="phoneValidate" id="phoneValidate" ng-model="vm.listin.NVOMSISDN" value="" class="form-control" placeholder="000000000" maxlength="9" size="10" required autofocus/>
     					<!-- 9 digitos y el primero solo puede ser 6 o 7 -->
     				</div>
     				<div class="col-xs-1 col-md-2" id="inputMobile-btn-panel">
     					<!-- <button type="submit" class="btn btn-primary" id="btnSearch"></button>  -->
-    					<button  ng-click="vm.findNumber()" class="btn btn-primary" id="btnSearch"></button>
+    					<button  ng-click="vm.findNumber()" title="Buscar" class="btn btn-primary" id="btnSearch"></button>
     				</div>
     			</form>
     		</div>		     			

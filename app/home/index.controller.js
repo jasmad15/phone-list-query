@@ -78,7 +78,7 @@
     			$('#response-empty').css('display','block');
     			$('#response-empty-phoneSearch').html(phoneNumber);
     			$('#messageMobile-panel').css('display','block');
-    		} else if (resultado === "B") {
+    		} else if (resultado === "G") {
     			$('#response-a').css('display','block');
     			$('#response-a-phoneSearch').html(phoneNumber);
     			$('#messageMobile-panel').css('display','block');

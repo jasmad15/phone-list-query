@@ -65,6 +65,7 @@
           <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
           <a ui-sref="home">Búsquedas</a>
           <a id="userManagement" ui-sref="account">Gestión de Usuarios</a>
+          <a id="loggingManagement" ui-sref="logging">Gestión de trazas</a>
           <a href="/login" target="_self">Logout</a>
         </div>        
         <!-- FIN Menu lateral -->          
@@ -86,8 +87,10 @@
     <script src="app-services/user.service.js"></script>
     <script src="app-services/flash.service.js"></script>
     <script src="app-services/phonelist.service.js"></script>
+    <script src="app-services/logger.service.js"></script>
     <script src="home/index.controller.js"></script>
     <script src="account/index.controller.js"></script>
+    <script src="logging/index.controller.js"></script>
     <script src="account/select.js"></script>
 </body>
 </html>
