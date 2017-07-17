@@ -1,0 +1,44 @@
+<div class="container side-collapse-container">
+	<div class="row">
+		<div
+			class="card card-2 card-search col-xs-12 col-md-10 col-md-offset-1">
+			<div class="row">
+				<div class="col-xs-10 col-md-11" id="inputMobile-panel">
+					<div class="row">
+						<h4>Gesti&oacute;n de trazas</h4>
+					</div>
+					<form>
+						<div class="row">
+							<div class="col-md-6">
+								<input type="text" id="dateFrom" placeholder="Fecha desde" ng-model="vm.log.dateFrom"
+									class="form-control form-field" />
+							</div>
+							<div class="col-md-6">
+								<input type="text" id="dateTo" placeholder="Fecha Hasta" ng-model="vm.log.dateTo"
+									class="form-control form-field"/>
+							</div>
+						</div>
+						<div  class="col-md-6">
+							 <select  id="typeReport" ng-model="vm.log.type">
+      							<option value="0">Option 1</option> <!-- interpolation -->
+      							<option value="1">Option 2</option>
+    						</select>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<input type="text" id="userName" placeholder="Usuario" ng-model="vm.log.username"
+									class="form-control form-field" />
+							</div>
+							<div class="col-xs-2 col-md-1">
+								<div class="form-group">
+									<button class="btn btn-primary" id="btnSearch"  ng-click="vm.getCSVLog()"></button>
+								</div>
+							</div>
+						</div>
+						<div id="LoggingTableContainer"></div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
