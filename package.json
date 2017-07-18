@@ -21,7 +21,8 @@
         "request": "^2.58.0",
         "rootpath": "^0.1.2",
         "json2csv": "3.8.0",
-        "iconv-lite": "0.4.18"
+        "iconv-lite": "0.4.18",
+        "self-reload-json": "0.3.0"
     },
     "license": "MIT"
 }

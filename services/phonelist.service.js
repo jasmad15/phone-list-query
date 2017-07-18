@@ -1,4 +1,6 @@
-var config = require('config.json');
+var SelfReloadJSON = require('self-reload-json');
+
+var config = new SelfReloadJSON('config.json');
 var mongo = require('mongoskin');
 var db = mongo.db(config.connectionString, { native_parser: true });
 //db.bind(process.env.PHONE_LIST);
@@ -14,6 +16,8 @@ module.exports = service;
 
 function findOne(phoneNumber)
 {
+	
+	console.log(config.test);
 	 var deferred = Q.defer();
 	 db.listin.findOne({ NVOMSISDN: parseInt(phoneNumber) }, 
 			 function(err,result)

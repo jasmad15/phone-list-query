@@ -70,18 +70,39 @@ function exportToCsv(log)
 	console.log(queryLog);
 	if (log.type == 0)
 	{
-		fields = ['date', 'desc', 'username' ];
-		fieldNames = ['Fecha', 'Descripción', "Usuario"];
+		fields = ['yearMonthDay', 'desc', 'username' ];
+		fieldNames = ['Fecha', 'Descripci\u00f3n', "Usuario"];
 		queryLog.action = "BUSQUEDA_NUMERO_EXITO";
 		
 	}else
 	{
-		fields = ['date', 'username' ];
+		fields = ['yearMonthDay', 'username' ];
 		fieldNames = ['Fecha', "Usuario"];
 		queryLog.action = "INICIO_SESION_EXITO";
 	}
 
 	try {
+		
+		db.logs.aggregate([{ $match:queryLog}, {$project: {yearMonthDay: { $dateToString: { format: "%Y-%m-%d %H:%M:%S", date: "$date" } }, desc:1, username:1 } }],function(err, logs){
+			if (err){
+				deferred.reject(err.name + ': ' + err.message);
+			}
+
+			if (logs) {
+				var csv  = json2csv({ data: logs, fields: fields, fieldNames: fieldNames, del: ';' });
+				var timeStampInMs = Date.now();
+				var fileName = 'logs_' + timeStampInMs + '.csv';
+				fs.writeFile(process.cwd() + '/app/reports/' +fileName,csv, {encoding: 'latin1'}, function(err) {
+					if (err){
+						deferred.reject(err.name + ': ' + err.message);
+					}
+					deferred.resolve('./reports/'+fileName);	
+				}); 
+			}
+		});
+
+		
+		/*
 		db.logs.find(queryLog).toArray(function(err, logs){
 			if (err){
 				deferred.reject(err.name + ': ' + err.message);
@@ -99,6 +120,7 @@ function exportToCsv(log)
 				}); 
 			}
 		});
+		*/
 	} catch (err) {
 
 			deferred.reject(err.name + ': ' + err.message);

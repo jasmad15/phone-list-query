@@ -63,9 +63,9 @@
         <!-- Menu lateral -->
         <div id="mySidenav" class="sidenav" style="width: 0;">
           <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-          <a ui-sref="home">Búsquedas</a>
-          <a id="userManagement" ui-sref="account">Gestión de Usuarios</a>
-          <a id="loggingManagement" ui-sref="logging">Gestión de trazas</a>
+          <a ui-sref="home" ui-sref-opts="{reload: true}">Búsquedas</a>
+          <a id="userManagement" ui-sref="account" ui-sref-opts="{reload: true}">Gestión de Usuarios</a>
+          <a id="loggingManagement" ui-sref="logging" ui-sref-opts="{reload: true}">Gestión de trazas</a>
           <a href="/login" target="_self">Logout</a>
         </div>        
         <!-- FIN Menu lateral -->          
