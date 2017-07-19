@@ -51,8 +51,12 @@
                 if (vm.currentUser.profile != 1 && vm.currentUser.profile != 2)
                 {
                 	$("#userManagement").remove();
-                }                
-               
+                }
+                //Quitamos la opcion de trazas
+                if (vm.currentUser.profile != 1)
+                {
+                	$("#loggingManagement").remove();
+                }
             });
             //Cargamos las agencias
             getListAgencies();
@@ -259,7 +263,7 @@
         	$("#btnOk").hide();
         	$("#btnCancel").hide();
         	delete vm.action;
-        	
+        	findListUsers();
         }
         
         function prepareUpdate(userName)

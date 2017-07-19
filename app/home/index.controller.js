@@ -26,6 +26,11 @@
                 {
                 	$("#userManagement").remove();
                 }
+                //Quitamos la opcion de trazas
+                if (vm.user.profile != 1)
+                {
+                	$("#loggingManagement").remove();
+                }                
                 //console.log (vm.user);                
             });
         }

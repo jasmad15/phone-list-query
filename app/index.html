@@ -53,9 +53,18 @@
           	<span id="hamburger-menu" onclick="openNav()">&#9776;</span>
           	<a href="#" class="navbar-brand">Validador.es</a>
         </div>
-	    <ul class="nav navbar-nav navbar-right" id="barra-logout">
+	    <!-- <ul class="nav navbar-nav navbar-right" id="barra-logout">
 	      <li><a href="/login" target="_self" id="btnClose"><span id="loginUser"><span class="glyphicon glyphicon-user"></span><span id="lbUserName" style="padding-left: 5px;"></span></span></span></a></li>
-	    </ul>        
+	    </ul> -->
+	    <ul class="nav navbar-nav navbar-right" id="barra-logout">
+	      <li class="sesionUser">      
+	      	<a href="/login" target="_self" id="btnClose" title="Cerrar sesión"></a>
+	      	<span id="loginUser" class="nameUser">
+	      		<span class="glyphicon glyphicon-user"></span>
+	      		<span id="lbUserName" style="padding-left: 5px;"></span>
+	      	</span>	      	
+	      </li>
+	    </ul> 	           
       </div>
         <div class="flash-message" ng-if="flash">
             <div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
