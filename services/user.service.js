@@ -58,6 +58,18 @@ function getById(_id) {
 function getByFilter(_user) {
 	var deferred = Q.defer();
 
+	if (_user.username)
+	{
+		_user.username = new RegExp(_user.username, "i");
+	}
+	if (_user.firstName)
+	{
+		_user.firstName = new RegExp(_user.firstName, "i");
+	}
+	if (_user.lastName)
+	{
+		_user.lastName = new RegExp(_user.lastName, "i");
+	}
 	db.users.find(_user).toArray(function(err, users){
 		if (err){
 			deferred.reject(err.name + ': ' + err.message);
