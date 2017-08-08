@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app', ['ui.router'])
+        .module('app', ['ngMaterial', "ui.router"])
         .config(config)
         .run(run)
         .factory('authHttpResponseInterceptor',['$q','$location','$window', function($q,$location,$window){

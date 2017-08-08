@@ -7,7 +7,8 @@
 					<div class="row">
 						<h4>Gesti&oacute;n de trazas</h4>
 					</div>
-					<form>
+					<form name="logForm">
+						<!-- 
 						<div class="row">
 							<div class="col-md-6">
 								<input type="text" id="dateFrom" placeholder="Fecha desde" ng-model="vm.log.dateFrom"
@@ -18,22 +19,51 @@
 									class="form-control form-field"/>
 							</div>
 						</div>
-						<div  class="col-md-6">
-							 <select  id="typeReport" ng-model="vm.log.type">
-      							<option value="0">Option 1</option> <!-- interpolation -->
-      							<option value="1">Option 2</option>
-    						</select>
-						</div>
+						  -->
+					  
 						<div class="row">
+						    <div  class="col-md-6">
+						      	<md-datepicker ng-model="vm.log.dateFrom" md-placeholder="Fecha desde"></md-datepicker>
+						    </div>
+						    <div  class="col-md-6">
+      							<md-datepicker ng-model="vm.log.dateTo" md-placeholder="Fecha hasta"></md-datepicker>
+      						</div>						
+						</div>
+						<hr>	
+						<div class="row">
+							<div  class="col-md-6">
+								 <select class="form-control form-field" id="typeReport" ng-model="vm.log.type">
+	      							<option value="0">Consultas</option>
+	      							<option value="1">Conexiones</option>
+	    						</select>
+							</div>
 							<div class="col-md-6">
-								<input type="text" id="userName" placeholder="Usuario" ng-model="vm.log.username"
+								<input type="text" id="userName" placeholder="Introduzca un usuario para filtrar por el" ng-model="vm.log.username"
 									class="form-control form-field" />
 							</div>
+							
+						<!-- 
+						<md-card-content flex="50">
+							<div layout="row">
+								<md-input-container>
+						          <label>Selecciona un tipo de CSV</label>
+						          <md-select  id="typeReport" name="type" ng-model="vm.log.type" required>
+						            <md-option value="0">Consultas</md-option>
+						            <md-option value="1">Conexiones</md-option>
+						          </md-select>
+						        </md-input-container>
+					        </div>													
+						</md-card-content>	
+						-->							
+													
+						</div>
+						<hr>
+						<div class="row">
 							<div class="col-xs-2 col-md-1">
 								<div class="form-group">
 									<button class="btn btn-primary" id="btnSearch"  ng-click="vm.getCSVLog()"></button>
 								</div>
-							</div>
+							</div>							
 						</div>
 						<div id="LoggingTableContainer"></div>
 					</form>

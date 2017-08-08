@@ -13,6 +13,7 @@
         vm.getLogging = getLogging;
         vm.getCSVLog = getCSVLog;
        
+        //vm.log.type = "0";        
         
         function getLogging() {
        	 

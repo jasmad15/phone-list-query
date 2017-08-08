@@ -1,8 +1,14 @@
+html {
+	background-color: #eee !important;
+}
 body {
   padding-top: 50px;
   padding-bottom: 40px;
-  background-color: #eee;
+  background-color: #eee !important;
   position: relative;
+}
+main {
+    padding-top: 50px;
 }
 pre {
     tab-size: 8;
@@ -446,6 +452,10 @@ span#hamburger-menu {
 		padding-left: 34px;
 	}
 	.user-row.red {
+	    font-size: 10pt;
+	    height: 23px;
+	}	
+	.user-row.grey {
 	    font-size: 10pt;
 	    height: 23px;
 	}	

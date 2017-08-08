@@ -13,7 +13,7 @@
 							<div class="col-md-6">
 								<!-- <input type="text" id="userName" placeholder="nombre@dominio.xxx"
 									class="form-control form-field" ng-model="vm.user.username" ng-required="vm.currentUser.profile != '1'"/>-->
-								<input type="text" id="userName" placeholder="nombre@dominio.xxx"
+								<input type="text" id="userName" placeholder="Usuario"
 									class="form-control form-field" ng-model="vm.user.username" ng-required=""/>									
 								<span ng-show="!userForm.$pristine && userForm.user.username.$error.required">Debes indicar un usurio</span>
 							</div>
@@ -79,11 +79,11 @@
 								</div>
 								<div class="row user-row grey" ng-repeat="x in vm.userList"
 									ng-class="{even: $even, odd: $odd}">
-									<div class="col-md-5 name">{{x.firstName}}</div>
-									<div class="col-md-5">
+									<div class="col-xs-5 col-md-5 name">{{x.firstName}}</div>
+									<div class="col-xs-4 col-md-5">
 										<a ng-href="#" ng-click="vm.prepareUpdate(x.username)">{{x.username}}</a>
 									</div>
-									<div class="col-md-2">
+									<div class="col-xs-2 col-md-2">
 
 										<span class="btnDelete" ng-click="vm.deleteUser(x._id)"></span>
 									</div>
