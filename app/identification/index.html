@@ -1,0 +1,72 @@
+<!-- <h1>Hi {{vm.user.firstName}}!!</h1>
+
+<div class="form-container">
+	<form method="post">
+		<div class="form-group">
+			<label for="numberPhone">Numero de telefono</label> <input
+				type="text" id="username" class="form-control" ng-model="vm.listin.NVOMSISDN" />
+		</div>
+
+		<div class="form-group">
+			<button class="btn btn-primary" ng-click="vm.findNumber()">Buscar</button>
+		</div>
+	</form>
+</div>
+-->
+<div class="container side-collapse-container"> 
+	<div class="row">
+     <div class="card card-2 card-search col-xs-12 col-md-10 col-md-offset-1">
+
+   	<div class="row">
+   		<div class="col-md-5" id="inputMobile-panel">
+   			<div class="row">
+   				<!-- <h1>{{vm.user.firstName}}</h1> -->
+   				<h4>Introduce el n&uacute;mero a validar</h4>
+   			</div>
+    		<div class="row">
+    			<form method="post" class="">
+    				<div class="col-xs-9 col-md-6" id="inputMobile-number-panel">
+    					<input type="text" pattern="[6-7]{1}[0-9]{8}" name="phoneValidate" id="phoneValidate" ng-model="vm.listin.NVOMSISDN" value="" class="form-control" placeholder="000000000" maxlength="9" size="10" required autofocus/>
+    					<!-- 9 digitos y el primero solo puede ser 6 o 7 -->
+    				</div>
+    				<div class="col-xs-1 col-md-2" id="inputMobile-btn-panel">
+    					<!-- <button type="submit" class="btn btn-primary" id="btnSearch"></button>  -->
+    					<button  ng-click="vm.findNumber()" title="Buscar" class="btn btn-primary" id="btnSearch"></button>
+    				</div>
+    			</form>
+    		</div>		     			
+   		</div>
+   		<div class="col-md-7" id="responseMobile-panel">
+   			<div id="response-empty" class="response-panel">
+   				<p><strong>OK</strong> a la venta de cualquier terminal a este cliente (<span id="response-empty-phoneSearch">000000000</span>)</p>
+   				<p>Grabar con Sfid <strong>ACTUAL</strong></p>
+   			</div>
+   			<div id="response-a" class="response-panel">
+   				<p><strong>OK</strong> a la venta de cualquier terminal a este cliente (<span id="response-a-phoneSearch">000000000</span>)</p>
+   				<p>Grabar con Sfid <strong>ALTO RIESGO</strong></p>
+   			</div>
+   			<div id="response-g" class="response-panel">
+   				<p>Vender SIMO o terminales Vodafone a este cliente (<span id="response-g-phoneSearch">000000000</span>)</p>
+   				<p>En caso de querer otro terminal:</br>NO SE FINANCIA - Pagar al contado</p>
+   				<p>Grabar con Sfid <strong>ALTO RIESGO</strong></p>
+   			</div>		     					     			
+   		</div>
+   	</div>
+   	<div class="row" id="spinner">
+   		<!--<img src="../img/spinnerTNP.svg"/>-->
+   		<object type="image/svg+xml" data="../img/spinnerTNP.svg" class="logo">
+				Spinner TNP <!-- fallback image in CSS -->
+	</object>
+   	</div>
+   	<div class="row">
+   		<div class="col-md-12" id="messageMobile-panel"><strong>Argumentario: </strong>Recuerde que, por motivos de seguridad, tendr&aacute; que estar usted presente a la hora de recibir el pedido y tener a mano su documento de identidad original</div>
+   	</div> 
+         <!--
+         <form method="post" class="form-signin">
+             <input type="text" name="phone" id="phone" value="" class="form-control" placeholder="Teléfono a buscar" maxlength="9" size="10" required autofocus/>
+             <p class="btnCentrado"><button type="submit" class="btn btn-primary" id="btnLogin"></button></p>
+         </form>
+         -->
+     </div>
+    </div>
+</div>

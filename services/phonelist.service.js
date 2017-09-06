@@ -3,8 +3,8 @@ var SelfReloadJSON = require('self-reload-json');
 var config = new SelfReloadJSON('config.json');
 var mongo = require('mongoskin');
 var db = mongo.db(config.connectionString, { native_parser: true });
-//db.bind(process.env.PHONE_LIST);
-db.bind('listin');
+//db.bind('listin');
+db.bind(config.telefon);
 var Q = require('q');
 var service = {};
 

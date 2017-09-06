@@ -42,6 +42,13 @@
                 controllerAs: 'vm',
                 data: { activeTab: 'account' }
             })
+             .state('identification', {
+                url: '/identification',
+                templateUrl: 'identification/index.html',
+                controller: 'Identification.IndexController',
+                controllerAs: 'vm',
+                data: { activeTab: 'identification' }
+            })
             .state('logging', {
                 url: '/logging',
                 templateUrl: 'logging/index.html',

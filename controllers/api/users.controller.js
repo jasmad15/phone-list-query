@@ -4,7 +4,7 @@ var router = express.Router();
 var userService = require('services/user.service');
 var logger = require('services/logger.service');
 var phoneList = require('services/phonelist.service');
-
+var identification = require('services/identification.service');
 //routes
 router.post('/authenticate', authenticateUser);
 router.post('/register', registerUser);
@@ -16,6 +16,7 @@ router.post('/findNumber', findNumber);
 router.post('/listAgencies', getListAgencies);
 router.post('/logging', getlogging);
 router.post('/getCSVlog', getCSVlog);
+router.post('/findId', findId);
 
 module.exports = router;
 
@@ -85,6 +86,25 @@ function findNumber(req, res) {
 	})
 	.catch(function (err) {
 		writeUserLog(req.user.sub, res,'BUSQUEDA_NUMERO_ERROR' , 'La consulta del número: ' + req.body.NVOMSISDN + ' ha terminado con error: ' + err , null);
+		res.status(400).send(err);
+	});
+}
+
+function findId(req, res) {
+	identification.findOne(req.body.NVOMSISDN)
+	.then(function (result) {
+		if (result)
+		{
+			writeUserLog(req.user.sub,res,'BUSQUEDA_ID_EXITO' , 'Se ha consultado el NIF: ' + req.body.NVOMSISDN + ' con resultado: ' + result.TIPO , null);
+		}else
+		{
+			writeUserLog(req.user.sub,res,'BUSQUEDA_ID_EXITO' , 'Se ha consultado el NIF: ' + req.body.NVOMSISDN + ' con resultado: Número no encontrado' , null);
+		}
+
+		res.status(200).send(result);
+	})
+	.catch(function (err) {
+		writeUserLog(req.user.sub, res,'BUSQUEDA_ID_ERROR' , 'La consulta del NIF: ' + req.body.NVOMSISDN + ' ha terminado con error: ' + err , null);
 		res.status(400).send(err);
 	});
 }
