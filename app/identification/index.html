@@ -1,18 +1,4 @@
-<!-- <h1>Hi {{vm.user.firstName}}!!</h1>
 
-<div class="form-container">
-	<form method="post">
-		<div class="form-group">
-			<label for="numberPhone">Numero de telefono</label> <input
-				type="text" id="username" class="form-control" ng-model="vm.listin.NVOMSISDN" />
-		</div>
-
-		<div class="form-group">
-			<button class="btn btn-primary" ng-click="vm.findNumber()">Buscar</button>
-		</div>
-	</form>
-</div>
--->
 <div class="container side-collapse-container"> 
 	<div class="row">
      <div class="card card-2 card-search col-xs-12 col-md-10 col-md-offset-1">
@@ -21,12 +7,12 @@
    		<div class="col-md-5" id="inputMobile-panel">
    			<div class="row">
    				<!-- <h1>{{vm.user.firstName}}</h1> -->
-   				<h4>Introduce el n&uacute;mero a validar</h4>
+   				<h4>Introduce el n&uacute;mero de identificador a validar</h4>
    			</div>
     		<div class="row">
     			<form method="post" class="">
     				<div class="col-xs-9 col-md-6" id="inputMobile-number-panel">
-    					<input type="text" pattern="[6-7]{1}[0-9]{8}" name="phoneValidate" id="phoneValidate" ng-model="vm.listin.NVOMSISDN" value="" class="form-control" placeholder="000000000" maxlength="9" size="10" required autofocus/>
+    					<input type="text" pattern="[6-7]{1}[0-9]{8}" name="phoneValidate" id="phoneValidate" ng-model="vm.identification.NVOMSISDN" value="" class="form-control" placeholder="000000000" maxlength="9" size="10" required autofocus/>
     					<!-- 9 digitos y el primero solo puede ser 6 o 7 -->
     				</div>
     				<div class="col-xs-1 col-md-2" id="inputMobile-btn-panel">

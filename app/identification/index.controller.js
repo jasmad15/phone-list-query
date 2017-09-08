@@ -3,7 +3,7 @@
 
     angular
         .module('app')
-        .controller('identification.IndexController', Controller);
+        .controller('Identification.IndexController', Controller);
 
     function Controller(UserService, IdentificationService, FlashService) {
         var vm = this;
@@ -35,13 +35,12 @@
             });
         }
         
-        function findNumber() {
-        	 //console.log ('a ' + vm.listin.NVOMSISDN);
+        function findId() {
         	 initPanels();
         	 
-        	 if (vm.listin.NVOMSISDN != undefined) {
+        	 if (vm.identification.NVOMSISDN != undefined) {
         		 showSpinner('block');
-                 PhoneListService.findNumber(vm.listin)
+                 IdentificationService.findId(vm.listin)
                  .then(function (data) {
                      //FlashService.Success(data.TIPO);
                      resultSearchProcess(data.TIPO, vm.listin.NVOMSISDN);
