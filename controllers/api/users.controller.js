@@ -91,7 +91,7 @@ function findNumber(req, res) {
 }
 
 function findId(req, res) {
-	identification.findOne(req.body.NVOMSISDN)
+	identification.findOne(req.body.CIF_NIF)
 	.then(function (result) {
 		if (result)
 		{

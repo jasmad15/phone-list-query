@@ -43,7 +43,7 @@
                 data: { activeTab: 'account' }
             })
              .state('identification', {
-                url: '/',
+                url: '/identification',
                 templateUrl: 'identification/index.html',
                 controller: 'Identification.IndexController',
                 controllerAs: 'vm',

@@ -11,7 +11,7 @@
         vm.user = null;
         vm.currentUser = null;
         vm.listin = null;
-        vm.findNumber = findNumber;
+        vm.findId = findId;
 
         initController();
 
@@ -38,12 +38,12 @@
         function findId() {
         	 initPanels();
         	 
-        	 if (vm.identification.NVOMSISDN != undefined) {
+        	 if (vm.identification.CIF_NIF != undefined) {
         		 showSpinner('block');
                  IdentificationService.findId(vm.listin)
                  .then(function (data) {
                      //FlashService.Success(data.TIPO);
-                     resultSearchProcess(data.TIPO, vm.listin.NVOMSISDN);
+                     resultSearchProcess(data.TIPO, vm.listin.CIF_NIF);
                      //console.log ('ddd: ' + data.TIPO);
                  })
                  .catch(function (error) {

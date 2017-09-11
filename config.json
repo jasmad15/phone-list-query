@@ -1,8 +1,8 @@
 {
- //   "connectionString": "mongodb://validador:Val2$68@127.0.0.1:27017/validador",
-	"connectionString": "mongodb://127.0.0.1:27017/validador",
-    "apiUrl": "http://localhost:3000/api",
+   "connectionString": "mongodb://validador:Val2$68@127.0.0.1:27017/validador",
+    "apiUrl": "http://localhost/api",
     "secret": "ESTO ES UN SECRETITO SI QUIERES QUE TE LO DIGA, DAME UN EURO",
     "telefon" : "listin",
     "identification": "identification"	
 }
+

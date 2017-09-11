@@ -77,6 +77,21 @@
     		showSpinner('none');
     	}
     	function resultSearchProcess(resultado, phoneNumber) {
+    		$('#spinner').css('display','none');
+    		if (resultado === "A") {
+    			$('#response-a').css('display','block');
+    			$('#response-a-phoneSearch').html(phoneNumber);
+    			$('#messageMobile-panel').css('display','block');
+    		} else if (resultado === "G") {
+    			$('#response-g').css('display','block');
+    			$('#response-g-phoneSearch').html(phoneNumber);
+    			$('#messageMobile-panel').css('display','block');
+    		} else if (resultado === null || resultado === undefined) {
+    			$('#response-empty').css('display','block');
+    			$('#response-empty-phoneSearch').html(phoneNumber);
+    			$('#messageMobile-panel').css('display','block');
+    		}
+    		/*
     		//Mostramos los paneles segun la respuest aque debuelva la consulta
     		$('#spinner').css('display','none');
     		if (resultado === "A") {
@@ -92,6 +107,7 @@
     			$('#response-g-phoneSearch').html(phoneNumber);
     			$('#messageMobile-panel').css('display','block');
     		}
+    		*/
     		//$('#messageMobile-panel').css('display','block');	
     	}
     	$(document).ready(function(){

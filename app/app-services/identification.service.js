@@ -8,12 +8,12 @@
     function Service($http, $q) {
         var service = {};
        
-        service.findNumber = findNumber;
+        service.findId = findId;
 
         return service;
 
 
-        function findNumber(data) {
+        function findId(data) {
             return $http.post('/api/users/findId', data).then(handleSuccess, handleError);
         }
 
