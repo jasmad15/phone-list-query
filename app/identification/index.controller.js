@@ -40,10 +40,10 @@
         	 
         	 if (vm.identification.CIF_NIF != undefined) {
         		 showSpinner('block');
-                 IdentificationService.findId(vm.listin)
+                 IdentificationService.findId(vm.identification)
                  .then(function (data) {
                      //FlashService.Success(data.TIPO);
-                     resultSearchProcess(data.TIPO, vm.listin.CIF_NIF);
+                     resultSearchProcess(data.TIPO, vm.identification.CIF_NIF);
                      //console.log ('ddd: ' + data.TIPO);
                  })
                  .catch(function (error) {

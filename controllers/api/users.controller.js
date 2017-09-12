@@ -95,16 +95,16 @@ function findId(req, res) {
 	.then(function (result) {
 		if (result)
 		{
-			writeUserLog(req.user.sub,res,'BUSQUEDA_ID_EXITO' , 'Se ha consultado el NIF: ' + req.body.NVOMSISDN + ' con resultado: ' + result.TIPO , null);
+			writeUserLog(req.user.sub,res,'BUSQUEDA_ID_EXITO' , 'Se ha consultado el NIF: ' + req.body.CIF_NIF + ' con resultado: ' + result.TIPO , null);
 		}else
 		{
-			writeUserLog(req.user.sub,res,'BUSQUEDA_ID_EXITO' , 'Se ha consultado el NIF: ' + req.body.NVOMSISDN + ' con resultado: Número no encontrado' , null);
+			writeUserLog(req.user.sub,res,'BUSQUEDA_ID_EXITO' , 'Se ha consultado el NIF: ' + req.body.CIF_NIF + ' con resultado: Número no encontrado' , null);
 		}
 
 		res.status(200).send(result);
 	})
 	.catch(function (err) {
-		writeUserLog(req.user.sub, res,'BUSQUEDA_ID_ERROR' , 'La consulta del NIF: ' + req.body.NVOMSISDN + ' ha terminado con error: ' + err , null);
+		writeUserLog(req.user.sub, res,'BUSQUEDA_ID_ERROR' , 'La consulta del NIF: ' + req.body.CIF_NIF + ' ha terminado con error: ' + err , null);
 		res.status(400).send(err);
 	});
 }

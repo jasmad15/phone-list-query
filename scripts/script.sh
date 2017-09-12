@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #obtenemos el timestamp
-
+zipFile="tal"
 timestamp=`date "+%s"`
 FILE=valCurrentCollection.txt
 
@@ -11,14 +11,11 @@ echo $timestamp
 
 #ejecutamos la importación
 
-mongoimport -d validador -c listin1 --type csv --file ListaValidadorJulio.txt --headerline
+mongoimport -d validador -c identification_$timestamp --type csv --file $FILE --headerline
 
-#guardamos el nombre de la colección en un fichero para la persistencia
 
-#borramos el fichero si exite
-rm $FILE
+mongo validador --eval "db.identification_%timespan1%.createIndex( { CIF_NIF: 1 } );"
 
-echo $timestamp >> $FILE
 
 #modificamos el fichero config.json
-jq --arg timestamp "$timestamp" '.collection = $timestamp' /usr/share/validador/config.json
+jq --arg timestamp "$timestamp" '.identification = identification_$timestamp' /usr/share/validador/config.json
