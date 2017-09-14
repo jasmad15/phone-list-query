@@ -33,28 +33,28 @@
                 templateUrl: 'home/index.html',
                 controller: 'Home.IndexController',
                 controllerAs: 'vm',
-                data: { activeTab: 'home' }
+                data: { activeTab: 'home', tittle: 'identification' }
             })
             .state('account', {
                 url: '/account',
                 templateUrl: 'account/index.html',
                 controller: 'Account.IndexController',
                 controllerAs: 'vm',
-                data: { activeTab: 'account' }
+                data: { activeTab: 'account', tittle: 'identification' }
             })
              .state('identification', {
                 url: '/identification',
                 templateUrl: 'identification/index.html',
                 controller: 'Identification.IndexController',
                 controllerAs: 'vm',
-                data: { activeTab: 'identification' }
+                data: { activeTab: 'identification', tittle: 'identification' }
             })
             .state('logging', {
                 url: '/logging',
                 templateUrl: 'logging/index.html',
                 controller: 'Logging.IndexController',
                 controllerAs: 'vm',
-                data: { activeTab: 'logging' }
+                data: { activeTab: 'logging' , tittle: 'identification'}
             });
         
         
@@ -69,6 +69,7 @@
         // update active tab on state change
         $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
             $rootScope.activeTab = toState.data.activeTab;
+            document.title = toState.data.tittle;
         });
     }
 

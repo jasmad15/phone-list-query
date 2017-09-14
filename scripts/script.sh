@@ -1,20 +1,20 @@
 #!/bin/bash
 
 #obtenemos el timestamp
-zipFile="tal"
+
 timestamp=`date "+%s"`
-FILE=valCurrentCollection.txt
+FILE=Lista_Blanca.txt
 
 echo $timestamp
 
-7za e $1 -pTNP_Validador 
+7za e $1 -p$2 
 
 #ejecutamos la importación
 
-mongoimport -d validador -c identification_$timestamp --type csv --file $FILE --headerline
+mongoimport -d validador -c identification_$timestamp --type csv --file $3 --headerline
 
 
-mongo validador --eval "db.identification_%timespan1%.createIndex( { CIF_NIF: 1 } );"
+mongo validador --eval "db.identification_$timestamp.createIndex( { CIF_NIF: 1 } );"
 
 
 #modificamos el fichero config.json

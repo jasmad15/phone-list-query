@@ -13,12 +13,12 @@ service.findOne = findOne;
 module.exports = service;
 
 
-function findOne(id)
+function findOne(idNumber)
 {
 	
-	console.log(config.identification);
+	console.log(config.test);
 	 var deferred = Q.defer();
-	 db.collection(config.identification).findOne({ CIF_NIF: id }, 
+	 db.listin.findOne({ NVOMSISDN: parseInt(idNumber) }, 
 			 function(err,result)
 			 {
 				 if (err) deferred.reject(err.name + ': ' + err.message);
