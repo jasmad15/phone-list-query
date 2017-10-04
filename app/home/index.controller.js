@@ -30,6 +30,7 @@
                 if (vm.user.profile != 1)
                 {
                 	$("#loggingManagement").remove();
+                	$("#identificationOpt").remove();
                 }                
                 //console.log (vm.user);                
             });
@@ -78,6 +79,7 @@
     	}
     	function resultSearchProcess(resultado, phoneNumber) {
     		$('#spinner').css('display','none');
+    		/*
     		if (resultado === "A") {
     			$('#response-a').css('display','block');
     			$('#response-a-phoneSearch').html(phoneNumber);
@@ -91,7 +93,7 @@
     			$('#response-empty-phoneSearch').html(phoneNumber);
     			$('#messageMobile-panel').css('display','block');
     		}
-    		/*
+    		*/
     		//Mostramos los paneles segun la respuest aque debuelva la consulta
     		$('#spinner').css('display','none');
     		if (resultado === "A") {
@@ -107,7 +109,6 @@
     			$('#response-g-phoneSearch').html(phoneNumber);
     			$('#messageMobile-panel').css('display','block');
     		}
-    		*/
     		//$('#messageMobile-panel').css('display','block');	
     	}
     	$(document).ready(function(){

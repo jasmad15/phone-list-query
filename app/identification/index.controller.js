@@ -30,6 +30,7 @@
                 if (vm.user.profile != 1)
                 {
                 	$("#loggingManagement").remove();
+                	$("#identificationOpt").remove();
                 }                
                 //console.log (vm.user);                
             });
@@ -37,18 +38,24 @@
         
         function findId() {
         	 initPanels();
-        	 
+        	 vm.identification.CIF_NIF = vm.identification.CIF_NIF.toUpperCase();
         	 if (vm.identification.CIF_NIF != undefined) {
-        		 showSpinner('block');
-                 IdentificationService.findId(vm.identification)
-                 .then(function (data) {
-                     //FlashService.Success(data.TIPO);
-                     resultSearchProcess(data.TIPO, vm.identification.CIF_NIF);
-                     //console.log ('ddd: ' + data.TIPO);
-                 })
-                 .catch(function (error) {
-                     FlashService.Error(error);
-                 });        		 
+        		 if (validate(vm.identification.CIF_NIF)) {
+	        		 showSpinner('block');
+	                 IdentificationService.findId(vm.identification)
+	                 .then(function (data) {
+	                     //FlashService.Success(data.TIPO);
+	                     //resultSearchProcess(data.TIPO, vm.identification.CIF_NIF);
+	                	 //console.log(data);
+	                	 resultSearchProcess(data);
+	                     //console.log ('ddd: ' + data.TIPO);
+	                 })
+	                 .catch(function (error) {
+	                     FlashService.Error(error);
+	                 });
+            	 } else {
+            		 FlashService.Error('Debes indicar un NIF/NIE valido');
+            	 }
         	 } else {
         		 FlashService.Error('Debes rellenar el número a búscar');
         	 }
@@ -75,23 +82,40 @@
     		//El spinner tambien por si se hubiese quedado por ahi
     		showSpinner('none');
     	}
-    	function resultSearchProcess(resultado, phoneNumber) {
+    	function resultSearchProcess(resultado) {
     		//Mostramos los paneles segun la respuest aque debuelva la consulta
     		$('#spinner').css('display','none');
-    		if (resultado === "A") {
+    		if (resultado != null && resultado != undefined && resultado != '' ) {
     			$('#response-empty').css('display','block');
-    			$('#response-empty-phoneSearch').html(phoneNumber);
-    			$('#messageMobile-panel').css('display','block');
-    		} else if (resultado === "G") {
-    			$('#response-a').css('display','block');
-    			$('#response-a-phoneSearch').html(phoneNumber);
-    			$('#messageMobile-panel').css('display','block');
-    		} else if (resultado === null || resultado === undefined) {
+    			//$('#response-empty-phoneSearch').html(phoneNumber);
+    			//$('#messageMobile-panel').css('display','block');
+    		} else {
     			$('#response-g').css('display','block');
-    			$('#response-g-phoneSearch').html(phoneNumber);
-    			$('#messageMobile-panel').css('display','block');
+    			//$('#response-g-phoneSearch').html(phoneNumber);
+    			//$('#messageMobile-panel').css('display','block');
     		}
     		//$('#messageMobile-panel').css('display','block');	
+    	}
+    	function validate(value){
+
+    		  var validChars = 'TRWAGMYFPDXBNJZSQVHLCKET';
+    		  var nifRexp = /^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKET]{1}$/i;
+    		  var nieRexp = /^[XYZ]{1}[0-9]{7}[TRWAGMYFPDXBNJZSQVHLCKET]{1}$/i;
+    		  var str = value.toString().toUpperCase();
+
+    		  if (!nifRexp.test(str) && !nieRexp.test(str)) return false;
+
+    		  var nie = str
+    		      .replace(/^[X]/, '0')
+    		      .replace(/^[Y]/, '1')
+    		      .replace(/^[Z]/, '2');
+
+    		  var letter = str.substr(-1);
+    		  var charIndex = parseInt(nie.substr(0, 8)) % 23;
+
+    		  if (validChars.charAt(charIndex) === letter) return true;
+
+    		  return false;
     	}
     	$(document).ready(function(){
     		//Inicializamos los paneles cuando vuelve a entrar en el campo. Damos por hecho que quiere una nueva consulta

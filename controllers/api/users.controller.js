@@ -20,11 +20,13 @@ router.post('/findId', findId);
 
 module.exports = router;
 
+var userLogged;
 function authenticateUser(req, res) {
 	userService.authenticate(req.body.username, req.body.password)
-
+	
 	.then(function (token) {
 		if (token) {
+			userLogged = req.body.username;
 			writeUserLog(null,res,'INICIO_SESION_EXITO','el usuario ' + req.body.username + ' se ha logado correctamente', req.body.username);
 			res.send({ token: token });
 
@@ -148,6 +150,7 @@ function writeUserLog(userId, res, action, desc, username)
 		var log = new Object();
 		log.date = new Date();
 		log.action = action
+		log.desc = desc;
 		log.username = username;
 		logger.insert(log);
 	}
@@ -156,11 +159,11 @@ function writeUserLog(userId, res, action, desc, username)
 function updateUser(req, res) {
 	userService.update(req.body)
 	.then(function () {
-		writeUserLog(req.user.sub,res,'ACTUALIZA_USUARIO_EXITO', 'Usuario '+ req.body.username + ' se ha actualizado con exito', null);
+		writeUserLog(req.user.sub,res,'ACTUALIZA_USUARIO_EXITO', 'Usuario '+ req.body.username + ' se ha actualizado con exito', userLogged);
 		res.sendStatus(200);
 	})
 	.catch(function (err) {
-		writeUserLog(req.user.sub,res,'ACTUALIZA_USUARIO_ERROR', 'Eroor al actulaizar el usuario '+ req.body.username + ' con error: ' + err, null);
+		writeUserLog(req.user.sub,res,'ACTUALIZA_USUARIO_ERROR', 'Eroor al actulaizar el usuario '+ req.body.username + ' con error: ' + err, userLogged);
 		res.status(400).send(err);
 	});
 
@@ -170,15 +173,23 @@ function updateUser(req, res) {
 
 function deleteUser(req, res) {
 	var userId = req.params._id;
-
-	userService.delete(userId)
-	.then(function () {
-		writeUserLog(userId,res,'BORRADO_USUARIO_EXITO', 'Borrado del usuario:  ' + userId + ' Con exito',null);
-		res.sendStatus(200);
-	})
-	.catch(function (err) {
-		writeUserLog(userId,res,'BORRADO_USUARIO_ERROR', 'Borrado del usuario:  ' + userId + ' Con error: ' + err,null);
-		res.status(400).send(err);
+	userService.getById(userId).then(function (userDeleted)
+	{
+		if (userDeleted)
+		{
+		userService.delete(userId)
+			.then(function () {
+				writeUserLog(userId,res,'BORRADO_USUARIO_EXITO', 'Borrado del usuario:  ' + userDeleted.username + ' con exito',userLogged);
+				res.sendStatus(200);
+			})
+				.catch(function (err) {
+				writeUserLog(userId,res,'BORRADO_USUARIO_ERROR', 'Borrado del usuario:  ' + userDeleted.username + ' con error: ' + err,userLogged);
+				res.status(400).send(err);
+			});
+		}else
+		{
+			res.status(400).send('Error no existe el usuario.');
+		}
 	});
 }
 
