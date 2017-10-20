@@ -128,6 +128,7 @@ function getCurrentUser(req, res) {
 
 function writeUserLog(userId, res, action, desc, username)
 {
+	//console.log('---------username' + username + "---------- ");
 	if (username == null)
 	{
 		userService.getById(userId).then(function (user) {
@@ -138,6 +139,7 @@ function writeUserLog(userId, res, action, desc, username)
 				log.action = action
 				log.desc = desc;
 				log.username = user.username;
+				log.agencia = user.agencia;
 				logger.insert(log);
 			} 			
 		})
@@ -159,11 +161,11 @@ function writeUserLog(userId, res, action, desc, username)
 function updateUser(req, res) {
 	userService.update(req.body)
 	.then(function () {
-		writeUserLog(req.user.sub,res,'ACTUALIZA_USUARIO_EXITO', 'Usuario '+ req.body.username + ' se ha actualizado con exito', userLogged);
+		writeUserLog(req.user.sub,res,'ACTUALIZA_USUARIO_EXITO', 'Usuario '+ req.body.username + ' se ha actualizado con exito', null);
 		res.sendStatus(200);
 	})
 	.catch(function (err) {
-		writeUserLog(req.user.sub,res,'ACTUALIZA_USUARIO_ERROR', 'Eroor al actulaizar el usuario '+ req.body.username + ' con error: ' + err, userLogged);
+		writeUserLog(c,res,'ACTUALIZA_USUARIO_ERROR', 'Eroor al actulaizar el usuario '+ req.body.username + ' con error: ' + err, null);
 		res.status(400).send(err);
 	});
 
@@ -179,11 +181,11 @@ function deleteUser(req, res) {
 		{
 		userService.delete(userId)
 			.then(function () {
-				writeUserLog(userId,res,'BORRADO_USUARIO_EXITO', 'Borrado del usuario:  ' + userDeleted.username + ' con exito',userLogged);
+				writeUserLog(req.user.sub,res,'BORRADO_USUARIO_EXITO', 'Borrado del usuario:  ' + userDeleted.username + ' con exito',null);
 				res.sendStatus(200);
 			})
 				.catch(function (err) {
-				writeUserLog(userId,res,'BORRADO_USUARIO_ERROR', 'Borrado del usuario:  ' + userDeleted.username + ' con error: ' + err,userLogged);
+				writeUserLog(req.user.sub,res,'BORRADO_USUARIO_ERROR', 'Borrado del usuario:  ' + userDeleted.username + ' con error: ' + err,null);
 				res.status(400).send(err);
 			});
 		}else
@@ -199,10 +201,10 @@ function getlogging(req, res) {
 	
 		if (result)
 		{
-			writeUserLog(req,res,'BUSQUEDA_LOGS_EXITO' , 'Se ha consultado las trazas correctamente ' , null);
+			writeUserLog(req.user.sub,res,'BUSQUEDA_LOGS_EXITO' , 'Se ha consultado las trazas correctamente ' , null);
 		}else
 			{
-			writeUserLog(req,res,'BUSQUEDA_LOGS_ERROR' , 'Se ha consultado las trazas con error', null);
+			writeUserLog(req.user.sub,res,'BUSQUEDA_LOGS_ERROR' , 'Se ha consultado las trazas con error', null);
 			}
 			res.status(200).send(result);
 	})
@@ -218,8 +220,13 @@ function getCSVlog(req, res) {
 	
 		if (result)
 		{
-			res.status(200).send(result);
-		}
+			writeUserLog(req.user.sub,res,'EXTRACCION_LOGS_EXITO' , 'Se ha consultado las trazas correctamente ' , null);
+		}else
+			{
+			writeUserLog(req.user.sub,res,'EXTRACCION_LOGS_ERROR' , 'Se ha consultado las trazas con error', null);
+			}
+		res.status(200).send(result);
+			
 	})
 	.catch(function (err) {
 		writeUserLog(req,res,'BUSQUEDA_LOGS_ERROR' , 'La consulta de trazas ha terminado con error: ' + err , null);

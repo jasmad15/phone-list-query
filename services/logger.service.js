@@ -70,20 +70,23 @@ function exportToCsv(log)
 	console.log(queryLog);
 	if (log.type == 0)
 	{
-		fields = ['yearMonthDay', 'desc', 'username' ];
-		fieldNames = ['Fecha', 'Descripci\u00f3n', "Usuario"];
+		fields = ['yearMonthDay', 'desc', 'username', 'agencia' ];
+		fieldNames = ['Fecha', 'Descripci\u00f3n', 'Usuario', 'Agencia'];
 		queryLog.action = "BUSQUEDA_NUMERO_EXITO";
-		
+	} else if (log.type == 2) {
+		fields = ['yearMonthDay', 'desc', 'username', 'agencia' ];
+		fieldNames = ['Fecha', 'Descripci\u00f3n', 'Usuario', 'Agencia'];
+		queryLog.action = "BUSQUEDA_ID_EXITO";		
 	}else
 	{
 		fields = ['yearMonthDay', 'username' ];
-		fieldNames = ['Fecha', "Usuario"];
+		fieldNames = ['Fecha', 'Usuario'];
 		queryLog.action = "INICIO_SESION_EXITO";
 	}
 
 	try {
 		
-		db.logs.aggregate([{ $match:queryLog}, {$project: {yearMonthDay: { $dateToString: { format: "%Y-%m-%d %H:%M:%S", date: "$date" } }, desc:1, username:1 } }],function(err, logs){
+		db.logs.aggregate([{ $match:queryLog}, {$project: {yearMonthDay: { $dateToString: { format: "%Y-%m-%d %H:%M:%S", date: "$date" } }, desc:1, username:1, agencia:1 } }],function(err, logs){
 			if (err){
 				deferred.reject(err.name + ': ' + err.message);
 			}
